@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:fragment="head">
+
+    <!--Essential Tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--SEO Meta Tags-->
+    <meta name="description" th:content="${pageDescription}" content="Default Description">
+    <meta name="keywords" th:content="${pageKeywords} "content="Default Keywords">
+    <meta name="author" content="Jose Brache Garcia">
+    <meta property="og:title" th:content="${pageTitle}" content="Default Title">
+    <meta property="og:description" th:content="${pageDescription}" content="Default description">
+    <meta property="og:image" content="img/favicon.ico">
+    <meta property="og:url" th:content="${pageUrl}" content="https://example.com">
+
+    <!-- Title Tag -->
+    <title th:text="${pageTitle}">Default Page Title</title>
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/img/favicon.ico" th:href="${baseUrl + '/img/favicon.ico'}" type="image/x-icon">
+
+    <!--Plugin StyleSheets-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" th:href="${baseUrl + '/plugins/fontawesome-free/css/all.min.css'}">
+    <link rel="stylesheet" href="/plugins/bootstrap-5/css/bootstrap.min.css" th:href="${baseUrl + '/plugins/bootstrap-5/css/bootstrap.min.css'}">
+    <link rel="stylesheet" href="/plugins/adminlte/css/adminlte.css" th:href="${baseUrl + '/plugins/adminlte/css/adminlte.css'}">
+    <link rel="stylesheet" href="/plugins/cookiealert/cookiealert.css" th:href="${baseUrl + '/plugins/cookiealert/cookiealert.css'}">
+
+    <!--Custom StyleSheets-->
+    <link rel="stylesheet" href="/css/style.css" th:href="${baseUrl + '/css/style.css'}">
+
+    <!-- CSS Links -->
+    <link rel="stylesheet">
+    <link rel="stylesheet">
+
+    <!--Plugin Scripts-->
+    <script src="plugins/bootstrap-5/js/bootstrap.bundle.min.js" th:src="${baseUrl + '/plugins/bootstrap-5/js/bootstrap.bundle.min.js'}"></script>
+    <script src="plugins/bootstrap-5/js/bootstrap.min.js" th:src="${baseUrl + '/plugins/bootstrap-5/js/bootstrap.min.js'}"></script>
+    <script src="plugins/jquery/jquery.min.js" th:src="${baseUrl + '/plugins/jquery/jquery.min.js'}"></script>
+</head>
+</html>
+
