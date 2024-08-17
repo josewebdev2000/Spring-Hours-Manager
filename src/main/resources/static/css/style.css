@@ -5,11 +5,6 @@
     box-sizing: border-box;
 }
 
-a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]
-{
-    display: none;
-}
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -211,7 +206,7 @@ nav a:hover::after {
 }
 
 /* Responsive Styles */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     header {
         padding: 10px;
         flex-direction: column;
