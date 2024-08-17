@@ -80,12 +80,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6">
+                        <div class="col-12 col-sm-12 col-md-6 text-center">
                             <h3>Join Us</h3>
                             <p>Join the growing community of users who trust HoursManager to keep their time management on track.</p>
                             <p>Whether you're a freelancer, a small business owner, or part of a large organization, HoursManager is here to help you achieve your goals.</p>
                         </div>
-                        <div class="col col-sm-12 col-md-6">
+                        <div class="col col-sm-12 col-md-6 text-center">
                             <h3>Get In Touch</h3>
                             <p>We love hearing from our users! If you have any questions, feedback, or suggestions, feel free to contact us. Your input helps us improve and serve you better.</p>
                             <p>Thank you for choosing HoursManager. Together, let's make every hour count!</p>
@@ -94,76 +94,16 @@
                     <div class="row mt-5">
                         <div class="col-12 w-100">
                             <h3>Frequently Asked Questions</h3>
-                            <div class="accordion" id="faq-accordion">
+                            <div class="accordion accordion-flush" id="faqAccordion">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="calculations-faq-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#calculations-faq-content" aria-expanded="false" aria-controls="calculations-faq-content">
+                                    <h2 class="accordion-header" id="calculationsFaqHeader">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#calculationsFaqContent" aria-expanded="false" aria-controls="calculationsFaqContent">
                                             How will HoursManager round numbers to calculate my income?
                                         </button>
                                     </h2>
-                                    <div id="calculations-faq-content" class="accordion-collapse collapse" aria-labelledby="calculations-faq-header" data-bs-parent="#faq-accordion">
+                                    <div id="calculationsFaqContent" class="accordion-collapse collapse" aria-labelledby="calculationsFaqHeader" data-bs-parent="#faqAccordion">
                                         <div class="accordion-body">
-                                            <p>Since we know employers may use different rounding criteria to pay, we'll let you choose the same rounding criteria your employer has so your calculations are tailored to your needs</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="rates-faq-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rates-faq-content" aria-expanded="false" aria-controls="rates-faq-content">
-                                            Does HoursManager consider a different sort of rating system other than hourly rates?
-                                        </button>
-                                    </h2>
-                                    <div id="rates-faq-content" class="accordion-collapse collapse" aria-labelledby="rates-faq-header" data-bs-parent="#faq-accordion">
-                                        <div class="accordion-body">
-                                            <p>It doesn't matter if you get paid per hour, per day, or even on a fixed salary. HoursManager lets you choose your rating system to meet to your needs.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="tips-faq-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tips-faq-content" aria-expanded="false" aria-controls="tips-faq-content">
-                                            If I get tips in my job, will HoursManager consider them in its calculations?
-                                        </button>
-                                    </h2>
-                                    <div id="tips-faq-content" class="accordion-collapse collapse" aria-labelledby="tips-faq-header" data-bs-parent="#faq-accordion">
-                                        <div class="accordion-body">
-                                            <p>HoursManager lets you add the tips you earned in the calculations or to ignore them. You just need to specify if you earn tips in your job.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="paychecks-faq-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#paychecks-faq-content" aria-expanded="false" aria-controls="paychecks-faq-content">
-                                            If I get paid every two weeks, will HoursManager still calculate my weekly income?
-                                        </button>
-                                    </h2>
-                                    <div id="paychecks-faq-content" class="accordion-collapse collapse" aria-labelledby="paychecks-faq-header" data-bs-parent="#faq-accordion">
-                                        <div class="accordion-body">
-                                            <p>HoursManager will automatically calculate your income based on how often you get paid, however you could manually change this frequency if you want</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="roles-faq-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#roles-faq-content" aria-expanded="false" aria-controls="roles-faq-content">
-                                            If I work two positions for the same employers with different earnings, will HoursManager consider them as the same?
-                                        </button>
-                                    </h2>
-                                    <div id="roles-faq-content" class="accordion-collapse collapse" aria-labelledby="roles-faq-header" data-bs-parent="#faq-accordion">
-                                        <div class="accordion-body">
-                                            <p>No, HoursManager lets you add multiple jobs/roles for the same employers.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="taxes-faq-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#taxes-faq-content" aria-expanded="false" aria-controls="taxes-faq-content">
-                                            Will HoursManager calculate my income before taxes or after taxes?
-                                        </button>
-                                    </h2>
-                                    <div id="taxes-faq-content" class="accordion-collapse collapse" aria-labelledby="taxes-faq-header" data-bs-parent="#faq-accordion">
-                                        <div class="accordion-body">
-                                            <p>HoursManager will calculate your income before taxes since we acknowledge calculating taxes may be a complicated process dependent on factors outside our scope of concern.</p>
+                                            <p>Since we know employers may use different rounding criteria to pay, we'll let you choose the same rounding criteria your employer has so your calculations accomodate to your needs</p>
                                         </div>
                                     </div>
                                 </div>
