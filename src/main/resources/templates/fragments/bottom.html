@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--Provide the body JS links at the bottom of all web pages-->
+<body>
+<div id="body-scripts" th:fragment="body-scripts">
+
+    <!--Dependency DOM Scripts-->
+    <script src="/plugins/adminlte/js/adminlte.js" th:src="${baseUrl + '/plugins/adminlte/js/adminlte.js'}"></script>
+    <script src="/plugins/cookiealert/cookiealert.js" th:src="${baseUrl + '/plugins/cookiealert/cookiealert.js'}"></script>
+
+    <!--Custom Scripts-->
+
+    <!--JS Constants-->
+    <script src="/js/constants.js" th:src="${baseUrl + '/js/constants.js'}"></script>
+
+    <!--JS Helpers-->
+    <script src="/js/helpers.js" th:src="${baseUrl + '/js/helpers.js'}"></script>
+
+    <script src="/js/snippets/spinners/loading.js" th:src="${baseUrl + '/js/snippets/spinners/loading.js'}"></script>
+
+    <!--JS OOP Classes-->
+    <script src="/js/oop/ResponsiveElement.js" th:src="${baseUrl + '/js/oop/ResponsiveElement.js'}"></script>
+
+    <!--Page Scripts-->
+    <script src="/js/index.js" th:src="${baseUrl + '/js/index.js'}"></script>
+</div>
+</body>
+</html>

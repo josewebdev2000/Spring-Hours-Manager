@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:lang="en">
-<head th:replace="fragments/head.html :: head"></head>
+<head th:replace="fragments/head.html :: head">
+
+</head>
 <body>
-<div class="wrapper">
   <!-- Header -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">MyApp</a>
-    </nav>
-  </header>
+  <header th:replace="fragments/header.html :: header"></header>
 
   <!-- Main Content -->
-  <main role="main" class="container">
-    <h1>Welcome to MyApp</h1>
-    <p>Here is some introductory content for the home page.</p>
+  <main role="main" id="index-main">
+    <div id="index-hero-container" class="content d-flex flex-column justify-content-center align-items-center">
+      <div class="hero grayish-hero d-flex flex-column justify-content-center align-items-center text-center p-5 m-5">
+
+        <img class="d-block mx-auto mb-4 img-fluid" id="logo-pic" src="/img/chronometer-128px.png" th:src="${baseUrl + '/img/chronometer-128px.png'}" alt="HoursManger Logo">
+
+        <h1 class="display-5 purple-color">HOURS MANAGER</h1>
+
+        <p class="fsize-120">Do you have more than one job and struggle to keep track of your working hours? </p>
+
+        <p class="fsize-120">Don't you think it'd be great to easily manage and keep track of all your hours in one place?</p>
+
+        <p class="fsize-120">That place is HoursManager</p>
+
+        <p class="fsize-120">What are you waiting for?</p>
+
+        <!--Using PHP defined variables to build up HTML link attributes-->
+        <a href="/register" th:src="${baseUrl + '/register'}" class="start-here-button btn-purple silent-link">Start Here</a>
+
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
-  <footer>
-    <div class="footer">
-      <p>&copy; 2024 MyApp. All rights reserved.</p>
-    </div>
-  </footer>
-</div>
+  <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
 </html>

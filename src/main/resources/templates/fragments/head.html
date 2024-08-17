@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--Provide the <head> tag to all HTML Pages -->
 <head th:fragment="head">
 
     <!--Essential Tags-->
@@ -38,9 +39,9 @@
     <link rel="stylesheet">
 
     <!--Plugin Scripts-->
-    <script src="plugins/bootstrap-5/js/bootstrap.bundle.min.js" th:src="${baseUrl + '/plugins/bootstrap-5/js/bootstrap.bundle.min.js'}"></script>
-    <script src="plugins/bootstrap-5/js/bootstrap.min.js" th:src="${baseUrl + '/plugins/bootstrap-5/js/bootstrap.min.js'}"></script>
-    <script src="plugins/jquery/jquery.min.js" th:src="${baseUrl + '/plugins/jquery/jquery.min.js'}"></script>
+    <script src="/plugins/bootstrap-5/js/bootstrap.bundle.min.js" th:src="${baseUrl + '/plugins/bootstrap-5/js/bootstrap.bundle.min.js'}"></script>
+    <script src="/plugins/bootstrap-5/js/bootstrap.min.js" th:src="${baseUrl + '/plugins/bootstrap-5/js/bootstrap.min.js'}"></script>
+    <script src="/plugins/jquery/jquery.min.js" th:src="${baseUrl + '/plugins/jquery/jquery.min.js'}"></script>
 </head>
 </html>
 

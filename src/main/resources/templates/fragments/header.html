@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="header">
+  <h1><a class="silent-link purple-color purple-color-hover" href="/" th:src="${baseUrl} + '/'">HOURS MANAGER</a></h1>
+  <nav>
+    <a href="/" th:src="${baseUrl} + '/'">HOME</a>
+
+    <a href="/about" th:src="${baseUrl + '/about'}">ABOUT</a>
+
+    <a href="/contact" th:src="${baseUrl + '/contact'}">CONTACT</a>
+
+    <a href="/privacy" th:src="${baseUrl + '/privacy'}">PRIVACY</a>
+    <!-- Add Conditional Rendering to show user dashboard when user is logged in -->
+    <a href="/login" th:src="${baseUrl + '/login'}"><i class="fas fa-user"></i></a>
+  </nav>
+</header>
+</body>
+</html>
