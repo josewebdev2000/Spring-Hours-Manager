@@ -15,13 +15,13 @@
     <!--JS Helpers-->
     <script src="/js/helpers.js" th:src="${baseUrl + '/js/helpers.js'}"></script>
 
+    <!--Snippets-->
     <script src="/js/snippets/spinners/loading.js" th:src="${baseUrl + '/js/snippets/spinners/loading.js'}"></script>
+    <script src="/js/snippets/alerts/error.js" th:src="${baseUrl + '/js/snippets/alerts/error.js'}"></script>
+    <script src="/js/snippets/alerts/success.js" th:src="${baseUrl + '/js/snippets/alerts/success.js'}"></script>
 
-    <!--JS OOP Classes-->
-    <script src="/js/oop/ResponsiveElement.js" th:src="${baseUrl + '/js/oop/ResponsiveElement.js'}"></script>
-
-    <!--Page Scripts-->
-    <script src="/js/index.js" th:src="${baseUrl + '/js/index.js'}"></script>
+    <!--Conditionally Render Script for Contact Page-->
+    <script th:if="${request.getRequestURI().equals('/contact')}" src="/js/contact.js" th:src="${baseUrl + '/js/contact.js'}"></script>
 </div>
 </body>
 </html>

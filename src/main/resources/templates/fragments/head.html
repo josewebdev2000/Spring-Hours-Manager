@@ -31,12 +31,18 @@
     <link rel="stylesheet" href="/plugins/adminlte/css/adminlte.css" th:href="${baseUrl + '/plugins/adminlte/css/adminlte.css'}">
     <link rel="stylesheet" href="/plugins/cookiealert/cookiealert.css" th:href="${baseUrl + '/plugins/cookiealert/cookiealert.css'}">
 
+    <!--Conditionally Render Summernote CSS for the Contact Page-->
+    <link rel="stylesheet" th:if="${request.getRequestURI().equals('/contact')}" href="/plugins/summernote/summernote-bs5.min.css" th:href="${baseUrl + '/plugins/summernote/summernote-bs5.min.css'}">
+
     <!--Custom StyleSheets-->
     <link rel="stylesheet" href="/css/style.css" th:href="${baseUrl + '/css/style.css'}">
 
     <!--Dependency DOM Scripts-->
     <script src="/plugins/bootstrap-5/js/bootstrap.bundle.min.js" th:src="${baseUrl + '/plugins/bootstrap-5/js/bootstrap.bundle.min.js'}"></script>
     <script src="/plugins/jquery/jquery.min.js" th:src="${baseUrl + '/plugins/jquery/jquery.min.js'}"></script>
+
+    <!--Conditionally Render Summernote JS for the Contact Page-->
+    <script th:if="${request.getRequestURI().equals('/contact')}" src="/plugins/summernote/summernote-bs5.js" th:src="${baseUrl + '/plugins/summernote/summernote-bs5.js'}"></script>
 </head>
 </html>
 

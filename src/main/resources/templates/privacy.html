@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="fragments/head.html :: head"></head>
+<body>
+<!-- Header -->
+<header th:replace="fragments/header.html :: header"></header>
+
+<!--Main Content-->
+<main role="main">
+    <section class="banner">
+        <img src="/img/pocket_watch.jpg" th:src="${baseUrl + '/img/pocket_watch.jpg'}" alt="Clock Banner">
+    </section>
+    <section class="content">
+        <h2 class="fsize-200-e dark-purple-color mb-5">Privacy</h2>
+        <div class="privacy-content">
+            <div class="text">
+                <h3 class="fsize-150">Security Recommendations</h3>
+                <p><b><i>Hours Manager</i></b> advices customers not to share their credentials with anyone because they could risk losing their account.</p>
+                <p><b><i>Hours Manager</i></b> advises customers not to share screenshots of their dashboard panels to avoid security violations.</p>
+
+                <h3 class="fsize-150">User Controls And Options</h3>
+                <p><b><i>Hours Manager</i></b>lets their users change the username, email, and password of their <b><i>HoursManager</i></b> account.</p>
+                <p><b><i>Hours Manager</i></b> lets their uses export their data in Excel Spreadsheets and PDF Documents.</p>
+
+                <h3 class="fsize-150">Cookies and Tracking</h3>
+                <p><b><i>Hours Manager</i></b> provides users the option to use cookies to enhance their experience.</p>
+                <p><b><i>Hours Manager</i></b> uses strong encryption methods to enhance security.</p>
+
+                <h3 class="fsize-150">Data Storage and Management</h3>
+                <p><b><i>Hours Manager</i></b> uses a complex data management model to form relationships between the users' accounts and the data they store.</p>
+                <p><b><i>Hours Manager</i></b> grants customers the ability to add, read, modify, and delete their data.</p>
+
+                <h3 class="fsize-150">User Data Sharing</h3>
+                <p><b><i>Hours Manager</i></b> does not share with any third-party any details of the users' account without their express consent.
+                <p><b><i>Hours Manager</i></b> is hereby responsible for not sharing customers' data without their consent.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer th:replace="fragments/footer.html :: footer"></footer>
+<!--Body Scripts-->
+<div th:replace="fragments/bottom.html :: body-scripts"></div>
+</body>
+</html>

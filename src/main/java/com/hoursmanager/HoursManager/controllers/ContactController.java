@@ -8,21 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController
+public class ContactController
 {
-    // GET Route for Home Page (index.html)
-    @GetMapping("/")
-    public String index(Model model, HttpServletRequest request)
+    @GetMapping("/contact")
+    public String contact(Model model, HttpServletRequest request)
     {
-        // Add Dynamic data to template
         model.addAttribute("baseUrl", UrlUtils.getBaseUrl());
-        model.addAttribute("pageTitle", "Home");
-        model.addAttribute("pageDescription", "Hours Manager Web Application Home Page");
-        model.addAttribute("pageKeywords", "working, hours, tracker, budget, calculations, manager");
-        model.addAttribute("pageUrl", UrlUtils.getBaseUrl() + "/");
+        model.addAttribute("pageTitle", "Contact");
+        model.addAttribute("pageDescription", "Hours Manager Web Application Contact Page");
+        model.addAttribute("pageKeywords", "working, hours, tracker, budget, calculations, manager, contact page, contact us");
+        model.addAttribute("pageUrl", UrlUtils.getBaseUrl() + "/contact");
         model.addAttribute("year", TimeUtils.getCurrentYear());
         model.addAttribute("request", request);
 
-        return "index";
+        return "contact";
     }
 }
