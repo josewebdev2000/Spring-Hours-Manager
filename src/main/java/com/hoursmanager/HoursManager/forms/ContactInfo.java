@@ -24,5 +24,5 @@ public class ContactInfo
     public String subject;
 
     @JsonProperty("request")
-    public String message;
+    public String request;
 }

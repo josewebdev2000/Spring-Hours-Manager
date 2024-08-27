@@ -50,6 +50,9 @@ public class ContactController
             // Use the email service to try to send an email
             String responseMessage = emailService.sendContactEmailToUser(contactInfo);
 
+            // Use the email service to send email the website administrator
+            emailService.sendAdminEmailToAdmin(contactInfo);
+
             // In case of success, return Ok response
             return ResponseEntity.ok(new JsonPayloadSuccessResponse(responseMessage).getPayload());
         }

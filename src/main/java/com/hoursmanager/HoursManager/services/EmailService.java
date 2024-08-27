@@ -22,8 +22,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Service
 public class EmailService
@@ -40,25 +38,13 @@ public class EmailService
     @Value("${email.service.html.template.path}")
     private String emailHtmlTemplatePath;
 
+    @Value("${email.service.html.template.admin.path}")
+    private String adminEmailHtmlTemplatePath;
+
     public EmailService(RestTemplate restTemplate, ResourceLoader resourceLoader)
     {
         this.restTemplate = restTemplate;
         this.resourceLoader = resourceLoader;
-    }
-
-    private String prepareContactEmailForUser(String name, String date) throws IOException
-    {
-        // Grab the HTML from the no-reply.html template
-        Resource resource = resourceLoader.getResource(emailHtmlTemplatePath);
-
-        String emailTemplate = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
-
-        // Replace placeholders with actual data
-        emailTemplate = emailTemplate
-                .replace("{{NAME}}", name)
-                .replace("{{DATE}}", date);
-
-        return emailTemplate;
     }
 
     private void validateContactInfo(ContactInfo contactInfo) throws EmailServiceException
@@ -83,31 +69,43 @@ public class EmailService
         }
 
         // Validate the user's message
-        if (!BasicStrValidator.isValidBasicStr(contactInfo.getMessage()))
+        if (!BasicStrValidator.isValidBasicStr(contactInfo.getRequest()))
         {
             throw new EmailServiceException("Message is required");
         }
     }
 
-    public String sendContactEmailToUser(ContactInfo contactInfo) throws IOException, EmailServiceException
+    private String prepareContactEmailForUser(String name, String date) throws IOException
     {
-        // Validate contact info
-        validateContactInfo(contactInfo);
+        // Grab the HTML from the no-reply.html template
+        Resource resource = resourceLoader.getResource(emailHtmlTemplatePath);
+        String emailTemplate = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
 
-        // Grab email content
-        String htmlEmailContent = prepareContactEmailForUser(
-                contactInfo.getName(),
-                TimeUtils.getCurrentDate()
-        );
+        // Replace placeholders with actual data
+        emailTemplate = emailTemplate
+                .replace("{{NAME}}", name)
+                .replace("{{DATE}}", date);
 
-        // Prepare the JSON payload to send to the microservice
-        EmailDto emailDto = new EmailDto(
-                emailServiceApiKey,
-                contactInfo.getEmail(),
-                contactInfo.getSubject(),
-                htmlEmailContent
-        );
+        return emailTemplate;
+    }
 
+    private String prepareAdminEmailForAdmin(String name, String request, String date) throws IOException
+    {
+        // Grab the HTML from the admin-template.html template
+        Resource resource = resourceLoader.getResource(adminEmailHtmlTemplatePath);
+        String adminTemplate = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
+
+        // Replace placeholders with actual data
+        adminTemplate = adminTemplate
+                .replace("{{NAME}}", name)
+                .replace("{{MESSAGE}}", request)
+                .replace("{{DATE}}", date);
+
+        return adminTemplate;
+    }
+
+    private String sendEmailFromJsonRequest(EmailDto emailDto) throws IOException, EmailServiceException
+    {
         // Set request headers
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -142,5 +140,52 @@ public class EmailService
         {
             throw new EmailServiceException("Error while sending email");
         }
+    }
+
+    public String sendAdminEmailToAdmin(ContactInfo contactInfo) throws IOException, EmailServiceException
+    {
+        // Validate contact info
+        validateContactInfo(contactInfo);
+
+        // Grab email content
+        String htmlAdminEmailContent = prepareAdminEmailForAdmin(
+                "Hours Manager Administrator",
+                contactInfo.getRequest(),
+                TimeUtils.getCurrentDate()
+        );
+
+        // Prepare the JSON payload to send to the microservice
+        EmailDto emailDto = new EmailDto(
+                emailServiceApiKey,
+                "webad78573@gmail.com",
+                contactInfo.getSubject(),
+                htmlAdminEmailContent
+        );
+
+        // Send the admin email
+        return sendEmailFromJsonRequest(emailDto);
+    }
+
+    public String sendContactEmailToUser(ContactInfo contactInfo) throws IOException, EmailServiceException
+    {
+        // Validate contact info
+        validateContactInfo(contactInfo);
+
+        // Grab email content
+        String htmlEmailContent = prepareContactEmailForUser(
+                contactInfo.getName(),
+                TimeUtils.getCurrentDate()
+        );
+
+        // Prepare the JSON payload to send to the microservice
+        EmailDto emailDto = new EmailDto(
+                emailServiceApiKey,
+                contactInfo.getEmail(),
+                "Hours Manager Received Your Request",
+                htmlEmailContent
+        );
+
+        // Send the email already
+        return sendEmailFromJsonRequest(emailDto);
     }
 }
