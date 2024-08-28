@@ -8,7 +8,7 @@ target/
 .env
 
 # Ignore application.properties
-!**/src/main/**/application.properties
+/src/main/resources/application.properties
 
 sample_screenshots
 
