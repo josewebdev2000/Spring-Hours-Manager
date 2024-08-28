@@ -7,6 +7,11 @@ target/
 # Ignore .env vars
 .env
 
+# Ignore application.properties
+!**/src/main/**/application.properties
+
+sample_screenshots
+
 ### STS ###
 .apt_generated
 .classpath
