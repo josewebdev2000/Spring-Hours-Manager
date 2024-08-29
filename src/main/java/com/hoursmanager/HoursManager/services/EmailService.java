@@ -4,6 +4,7 @@ import com.hoursmanager.HoursManager.dto.EmailDto;
 import com.hoursmanager.HoursManager.dto.EmailMicroRes;
 import com.hoursmanager.HoursManager.exceptions.EmailServiceException;
 import com.hoursmanager.HoursManager.forms.ContactInfo;
+import com.hoursmanager.HoursManager.utils.CloudinaryImgUploader;
 import com.hoursmanager.HoursManager.utils.TimeUtils;
 
 import com.hoursmanager.HoursManager.validators.BasicStrValidator;
@@ -40,6 +41,16 @@ public class EmailService
 
     @Value("${email.service.html.template.admin.path}")
     private String adminEmailHtmlTemplatePath;
+
+    @Value("${cloudinary.api.cloud.name}")
+    private String cloudinaryApiCloudName;
+
+    @Value("${cloudinary.api.cloud.key}")
+    private String cloudinaryApiCloudKey;
+
+    @Value("${cloudinary.api.cloud.secret}")
+    private String cloudinaryApiCloudSecret;
+
 
     public EmailService(RestTemplate restTemplate, ResourceLoader resourceLoader)
     {
@@ -89,7 +100,7 @@ public class EmailService
         return emailTemplate;
     }
 
-    private String prepareAdminEmailForAdmin(String name, String request, String date) throws IOException
+    private String prepareAdminEmailForAdmin(String name, String request, String date) throws IOException, Exception
     {
         // Grab the HTML from the admin-template.html template
         Resource resource = resourceLoader.getResource(adminEmailHtmlTemplatePath);
@@ -100,6 +111,15 @@ public class EmailService
                 .replace("{{NAME}}", name)
                 .replace("{{MESSAGE}}", request)
                 .replace("{{DATE}}", date);
+
+        // Upload images so they become visible
+        CloudinaryImgUploader cloudImgUploader = new CloudinaryImgUploader(
+                cloudinaryApiCloudName,
+                cloudinaryApiCloudKey,
+                cloudinaryApiCloudSecret
+        );
+
+        adminTemplate = cloudImgUploader.replaceBase64WithUrls(adminTemplate);
 
         return adminTemplate;
     }
@@ -142,7 +162,7 @@ public class EmailService
         }
     }
 
-    public String sendAdminEmailToAdmin(ContactInfo contactInfo) throws IOException, EmailServiceException
+    public String sendAdminEmailToAdmin(ContactInfo contactInfo) throws IOException, EmailServiceException, Exception
     {
         // Validate contact info
         validateContactInfo(contactInfo);
