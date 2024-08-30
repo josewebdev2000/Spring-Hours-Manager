@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="fragments/head.html :: head"></head>
+<body>
+<!-- Header -->
+<header th:replace="fragments/header.html :: header"></header>
+
+<!--Main Content-->
+<main role="main">
+    <div class="login-container">
+        <div class="login-box">
+            <h2 class="fsize-200-e dark-purple-color">Log in</h2>
+            <form id="login-form" enctype="multipart/form-data" novalidate>
+                <div class="form-group position-relative">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                    <div class="valid-tooltip email">Email Looks Good</div>
+                    <div class="invalid-tooltip email"></div>
+                </div>
+                <div class="form-group position-relative">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+                    <div class="valid-tooltip password">Password Looks Good</div>
+                    <div class="invalid-tooltip password"></div>
+                </div>
+                <button id="login" class="btn btn-purple btn-block">Log in</button>
+                <div class="text-center mt-3">
+                    <a href="/register" th:href="${baseUrl + '/register'}">Need an account?</a><br>
+                    <!--a href="forgot-password.php">Forgot password?</a-->
+                </div>
+            </form>
+            <div class="form-group p-3 m-2">
+                <div id="form-alerts-container"></div>
+            </div>
+        </div>
+        <!--
+        <div class="d-none" id="hidden-login-form">
+            <form action="<?=$websiteUrl?>login.php" method="POST">
+                <input type="text" name="id" id="hidden-id">
+                <input type="submit" name="submit" id="hidden-submit">
+            </form>
+        </div>
+        -->
+    </div>
+</main>
+
+<!-- Footer -->
+<footer th:replace="fragments/footer.html :: footer"></footer>
+<!--Body Scripts-->
+<div th:replace="fragments/bottom.html :: body-scripts"></div>
+</body>
+</html>
