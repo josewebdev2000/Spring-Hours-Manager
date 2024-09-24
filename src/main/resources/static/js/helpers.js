@@ -154,6 +154,32 @@ function confirmPasswordValidate(confirm_id, ori_id)
         $(`.invalid-tooltip.${ori_id}`).text("Passwords Do Not Match");
     }
 
+    else if (confirmP.trim().length == 0)
+    {
+        $(`#${confirm_id}`).removeClass("is-valid");
+        $(`#${confirm_id}`).addClass("is-invalid");
+
+        $(`#${ori_id}`).removeClass("is-valid");
+        $(`#${ori_id}`).addClass("is-invalid");
+
+
+        $(`.invalid-tooltip.${confirm_id}`).text("Confirm Password Cannot Be Empty");
+        $(`.invalid-tooltip.${ori_id}`).text("Confirm Password Cannot Be Empty");
+    }
+
+    else if (!passwordRegex.test(oriP))
+    {
+        $(`#${confirm_id}`).removeClass("is-valid");
+        $(`#${confirm_id}`).addClass("is-invalid");
+
+        $(`#${ori_id}`).removeClass("is-valid");
+        $(`#${ori_id}`).addClass("is-invalid");
+
+
+        $(`.invalid-tooltip.${confirm_id}`).text("Password needs at least one uppercase, one lowecase, one digit, and eight characters");
+        $(`.invalid-tooltip.${ori_id}`).text("Confirm Password needs at least one uppercase, one lowecase, one digit, and eight characters");
+    }
+
     else
     {
         $(`#${confirm_id}`).removeClass("is-invalid");

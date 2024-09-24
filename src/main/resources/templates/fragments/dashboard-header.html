@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
+<body>
+<nav class="main-header navbar navbar-expand navbar-light" th:fragment="dashboard-header">
+    <ul class="navbar-nav">
+        <!--Contains Button to make Sidebar Appear or Dissapear-->
+        <!--LEAVE IT THERE-->
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+        </li>
+    </ul>
+</nav>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
+</body>
+</html>

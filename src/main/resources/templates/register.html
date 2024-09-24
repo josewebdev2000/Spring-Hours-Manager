@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:lang="en">
-<head th:replace="fragments/head.html :: head"></head>
+<head th:replace="~{fragments/head.html :: head}"></head>
 <body>
 <!-- Header -->
-<header th:replace="fragments/header.html :: header"></header>
+<header th:replace="~{fragments/header.html :: header}"></header>
 
 <!--Main Content-->
 <main role="main">
@@ -45,17 +45,19 @@
             </div>
         </div>
     </div>
+    <!--
     <div class="d-none" id="hidden-login-form">
         <form action="<?=$websiteUrl?>register.php" method="POST">
             <input type="number" name="id" id="hidden-id">
             <input type="submit" name="submit" id="hidden-submit">
         </form>
     </div>
+    -->
 </main>
 
 <!-- Footer -->
-<footer th:replace="fragments/footer.html :: footer"></footer>
+<footer th:replace="~{fragments/footer.html :: footer}"></footer>
 <!--Body Scripts-->
-<div th:replace="fragments/bottom.html :: body-scripts"></div>
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
 </body>
 </html>

@@ -5,10 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/*
-* Represent the payload received from the back-end when a request is sent
-* */
-
-public class EmailMicroRes extends ResponseRes
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResponseRes
 {
+    @JsonProperty("message")
+    private String message;
+
+    @JsonProperty("success")
+    private boolean success;
 }

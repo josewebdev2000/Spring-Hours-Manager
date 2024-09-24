@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
+<body>
+<div class="wrapper">
+    <!--Import Dashboard Header-->
+    <nav th:replace="~{fragments/dashboard-header.html :: dashboard-header}"></nav>
+</div>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
+</body>
+</html>

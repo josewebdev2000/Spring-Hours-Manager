@@ -22,6 +22,10 @@
 
     <!--Conditionally Render Script for Contact Page-->
     <script th:if="${request.getRequestURI().equals('/contact')}" src="/js/contact.js" th:src="${baseUrl + '/js/contact.js'}"></script>
+
+    <!--Conditionally Render Script for Register and Login Pages-->
+    <script th:if="${request.getRequestURI().equals('/register')}" src="/js/register.js" th:src="${baseUrl + '/js/register.js'}"></script>
+    <script th:if="${request.getRequestURI().equals('/login')}" src="/js/login.js" th:src="${baseUrl + '/js/login.js'}"></script>
 </div>
 </body>
 </html>
