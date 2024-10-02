@@ -20,6 +20,9 @@
     <script src="/js/snippets/alerts/error.js" th:src="${baseUrl + '/js/snippets/alerts/error.js'}"></script>
     <script src="/js/snippets/alerts/success.js" th:src="${baseUrl + '/js/snippets/alerts/success.js'}"></script>
 
+    <!--Condittionally Render Script to Logout-->
+    <script src="/js/logout.js" th:src="${baseUrl + '/js/logout.js'}"></script>
+
     <!--Conditionally Render Script for Contact Page-->
     <script th:if="${request.getRequestURI().equals('/contact')}" src="/js/contact.js" th:src="${baseUrl + '/js/contact.js'}"></script>
 

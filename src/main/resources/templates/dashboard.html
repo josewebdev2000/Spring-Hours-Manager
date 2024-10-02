@@ -5,6 +5,11 @@
 <div class="wrapper">
     <!--Import Dashboard Header-->
     <nav th:replace="~{fragments/dashboard-header.html :: dashboard-header}"></nav>
+    <!--Import Dashboard Sidebar-->
+    <aside th:replace="~{fragments/dashboard-sidebar.html :: dashboard-sidebar}"></aside>
+
+    <!--Place content of the index page here-->
+    <div class="content-wrapper"></div>
 </div>
 <!--Body Scripts-->
 <div th:replace="~{fragments/bottom.html :: body-scripts}"></div>

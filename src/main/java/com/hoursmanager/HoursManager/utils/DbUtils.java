@@ -16,4 +16,31 @@ public class DbUtils
 
         return springUser != null;
     }
+
+    public static String getUserProfilePic(Long userId, SpringUserRepository springUserRepository, String defaultImgPath)
+    {
+        // Grab the user first
+        SpringUser springUser = springUserRepository.findById(userId).orElse(null);
+
+        if (springUser != null)
+        {
+            String springUserPicUrl = springUser.getSpringUserPicUrl();
+
+            if (springUserPicUrl != null)
+            {
+                return springUserPicUrl;
+            }
+
+            else
+            {
+                return defaultImgPath;
+            }
+        }
+
+        else
+        {
+            return defaultImgPath;
+        }
+
+    }
 }

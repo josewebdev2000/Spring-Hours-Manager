@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
+<body>
+<aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="dashboard-sidebar">
+    <a th:href="${baseUrl + '/dashboard'}" href="/dashboard" class="brand-link logo-switch">
+        <img th:src="${baseUrl + '/img/chronometer-128px.png'}" alt="MasterKey Key Logo" class="brand-image">
+        <span class="brand-text font-weight-light">HoursManager</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img class="img-circle img-fluid elevation-3"
+                     width="64"
+                     src="/img/avatars/user.png"
+                     th:src="${springUserPicUrl}" alt="User Profile Picture"
+                >
+            </div>
+            <div class="info fsize-120">
+                <a href="#" class="d-block" th:text="${springUserName}">Username</a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu">
+                <li class="nav-header">DASHBOARD</li>
+                <li class="nav-item">
+                    <a href="/dashboard" th:href="${baseUrl + '/dashboard'}" class="nav-link">
+                        <i class="nav-icon fas fa-th-list"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dashboard/jobs" th:href="${baseUrl + '/dashboard/jobs'}" class="nav-link">
+                        <i class="nav-icon fas fa-suitcase"></i>
+                        <p>Jobs</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dashboard/work-shifts" th:href="${baseUrl + '/dashboard/work-shifts'}" class="nav-link">
+                        <i class="nav-icon fas fa-business-time"></i>
+                        <p>Work Shifts</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dashboard/calculations" th:href="${baseUrl + '/dashboard/calculations'}" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>Calculations</p>
+                    </a>
+                </li>
+                <li class="nav-header">DETAILS</li>
+                <li class="nav-item">
+                    <a href="/about" th:href="${baseUrl + '/about'}" class="nav-link">
+                        <i class="nav-icon fas fa-info-circle"></i>
+                        <p>About</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact" th:href="${baseUrl + '/contact'}" class="nav-link">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>Contact</p>
+                    </a>
+                </li>
+                <li class="nav-header">EXIT</li>
+                <li class="nav-item">
+                    <form class="p-0 logout-form nav-link" action="/logout" th:action="${baseUrl + '/logout'}" method="POST">
+                        <a href="#" class="nav-link logout-btn">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p class="">Log Out</p>
+                        </a>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
+</body>
+</html>
