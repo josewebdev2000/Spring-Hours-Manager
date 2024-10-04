@@ -37,6 +37,9 @@
     <!--Custom StyleSheets-->
     <link rel="stylesheet" href="/css/style.css" th:href="${baseUrl + '/css/style.css'}">
 
+    <!--Conditionally Attach Dashboard Styles-->
+    <link rel="stylesheet" th:if="${request.getRequestURI().contains('/dashboard')}" href="/css/dashboard.css" th:href="${baseUrl + '/css/dashboard.css'}">
+
     <!--Conditionally Attach Login and Register StyleSheets to their routes-->
     <link rel="stylesheet" th:if="${request.getRequestURI().equals('/login')}" href="/css/login.css" th:href="${baseUrl + '/css/login.css'}">
     <link rel="stylesheet" th:if="${request.getRequestURI().equals('/register')}" href="/css/register.css" th:href="${baseUrl + '/css/register.css'}">

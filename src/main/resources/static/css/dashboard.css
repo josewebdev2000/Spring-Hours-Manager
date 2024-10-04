@@ -12,7 +12,12 @@
     background-color: #343a40; /* Ensure the background color matches your theme */
 }
 
-.header h1 {
+.form-text-hover-white:hover > *
+{
+    color: white;
+}
+
+.header.main-dashboard h1 {
     color: #5a2d82;
 }
 

@@ -4,6 +4,7 @@ import com.hoursmanager.HoursManager.enums.RedirectUrl;
 import com.hoursmanager.HoursManager.enums.SessionAttribute;
 import com.hoursmanager.HoursManager.repositories.SpringUserRepository;
 import com.hoursmanager.HoursManager.utils.DbUtils;
+import com.hoursmanager.HoursManager.utils.SessionUtils;
 import com.hoursmanager.HoursManager.utils.TimeUtils;
 import com.hoursmanager.HoursManager.utils.UrlUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,6 +41,8 @@ public class HomeController
         }
         // Add Dynamic data to template
         model.addAttribute("baseUrl", UrlUtils.getBaseUrl());
+        // Show the user is not logged in
+        model.addAttribute("isUserLoggedIn", false);
         model.addAttribute("pageTitle", "Home");
         model.addAttribute("pageDescription", "Hours Manager Web Application Home Page");
         model.addAttribute("pageKeywords", "working, hours, tracker, budget, calculations, manager");

@@ -37,6 +37,7 @@ public class LoginController
         if (session.getAttribute(SessionAttribute.USER_ID.getKey()) == null)
         {
             // Add Dynamic data to template
+            model.addAttribute("isUserLoggedIn", false);
             model.addAttribute("baseUrl", UrlUtils.getBaseUrl());
             model.addAttribute("pageTitle", "Login");
             model.addAttribute("pageDescription", "Hours Manager Web Application Login Page");

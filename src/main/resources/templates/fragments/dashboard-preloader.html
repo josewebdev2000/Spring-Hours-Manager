@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
+<body>
+<div class="preloader bg-dark flex-column justify-content-center align-items-center" th:fragment="dashboard-preloader">
+    <img class="animation__shake" src="/img/chronometer-128px.png" th:src="${baseUrl + '/img/chronometer-128px.png'}" alt="Hours Manager Logo" height="128" width="128">
+    <h2 class="text-white"><em><b>Hours Manager</b></em></h2>
+</div>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
+</body>
+</html>

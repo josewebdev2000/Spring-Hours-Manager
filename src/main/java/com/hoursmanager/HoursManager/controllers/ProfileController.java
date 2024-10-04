@@ -12,17 +12,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("/dashboard")
 @Controller
 @AllArgsConstructor
-public class DashboardController
+public class ProfileController
 {
     private final SpringUserRepository springUserRepository;
 
-    // GET Route for Dashboard Page (dashboard.html)
-    @GetMapping("/dashboard")
-    public String dashboard(Model model, HttpServletRequest request, HttpSession session)
+    // GET Route for Profile Page (profile.html)
+    @GetMapping("/profile")
+    public String profile(Model model, HttpServletRequest request, HttpSession session)
     {
+        // Check the user is logged in
         if (session.getAttribute(SessionAttribute.USER_ID.getKey()) == null)
         {
             return String.format("redirect:%s", RedirectUrl.HOME.getRedirectUrl());
@@ -35,7 +38,7 @@ public class DashboardController
 
         else
         {
-            // Grab the user's ID
+            // Grab the user's ID from the current session
             Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID.getKey());
 
             // Grab the current user
@@ -44,22 +47,26 @@ public class DashboardController
             // Grab the username
             String springUserName = springUser.getSpringUserName();
 
-            // Get the user's profile picture
-            String springUserProfilePic = DbUtils.getUserProfilePic(userId, springUserRepository, "/img/avatars/user.png");
+            // Grab the email address
+            String springUserEmail = springUser.getSpringUserEmail();
+
+            // Grab the user's profile picture
+            String springUserPicUrl = DbUtils.getUserProfilePic(userId, springUserRepository, "/img/avatars/user.png");
 
             // Add Dynamic data to the template
             model.addAttribute("baseUrl", UrlUtils.getBaseUrl());
-            model.addAttribute("pageTitle", "Dashboard");
-            model.addAttribute("pageDescription", "Hours Manager Web Application User Dashboard");
-            model.addAttribute("pageKeywords", "working, hours, tracker, budget, calculations, manager, dashboard, control panel");
+            model.addAttribute("pageTitle", "User Profile");
+            model.addAttribute("pageDescription", "Hours Manager Web Application User Profile");
+            model.addAttribute("pageKeywords", "working, hours, tracker, user, profile, settings, password change, forgot password");
             model.addAttribute("springUserName", springUserName);
-            model.addAttribute("springUserPicUrl", springUserProfilePic);
-            model.addAttribute("pageUrl", UrlUtils.getBaseUrl() + "/dashboard");
+            model.addAttribute("springUserEmail", springUserEmail);
+            model.addAttribute("springUserPicUrl", springUserPicUrl);
+            model.addAttribute("pageUrl", UrlUtils.getBaseUrl() + "/dashboard/profile");
             model.addAttribute("request", request);
 
-            return "dashboard";
-        }
+            return "profile";
 
+        }
     }
 
 }

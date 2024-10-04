@@ -60,12 +60,19 @@
                         <p>Contact</p>
                     </a>
                 </li>
-                <li class="nav-header">EXIT</li>
+                <li class="nav-header">PROFILE</li>
                 <li class="nav-item">
-                    <form class="p-0 logout-form nav-link" action="/logout" th:action="${baseUrl + '/logout'}" method="POST">
-                        <a href="#" class="nav-link logout-btn">
+                    <a href="/dashboard/profile" th:href="${baseUrl + '/dashboard/profile'}" class="nav-link">
+                        <i class="nav-icon fas fa-user-alt"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li class="nav-header">EXIT</li>
+                <li class="nav-item form-text-hover-white">
+                    <form class="p-0 form-text-hover-white logout-form nav-link" action="/logout" th:action="${baseUrl + '/logout'}" method="POST">
+                        <a href="#" class="nav-link form-text-hover-white logout-btn">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p class="">Log Out</p>
+                            <p>Log Out</p>
                         </a>
                     </form>
                 </li>

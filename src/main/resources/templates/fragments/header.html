@@ -4,15 +4,36 @@
 <header th:fragment="header">
   <h1><a class="silent-link purple-color purple-color-hover" href="/" th:src="${baseUrl} + '/'">HOURS MANAGER</a></h1>
   <nav>
-    <a href="/" th:src="${baseUrl} + '/'">HOME</a>
+    <a class="mb-3" href="/" th:src="${baseUrl} + '/'">HOME</a>
 
-    <a href="/about" th:src="${baseUrl + '/about'}">ABOUT</a>
+    <a class="mb-3" href="/about" th:src="${baseUrl + '/about'}">ABOUT</a>
 
-    <a href="/contact" th:src="${baseUrl + '/contact'}">CONTACT</a>
+    <a class="mb-3" href="/contact" th:src="${baseUrl + '/contact'}">CONTACT</a>
 
-    <a href="/privacy" th:src="${baseUrl + '/privacy'}">PRIVACY</a>
+    <a class="mb-3" href="/privacy" th:src="${baseUrl + '/privacy'}">PRIVACY</a>
     <!-- Add Conditional Rendering to show user dashboard when user is logged in -->
-    <a href="/login" th:src="${baseUrl + '/login'}"><i class="fas fa-user"></i></a>
+    <a th:if="${!isUserLoggedIn}" href="/login" th:src="${baseUrl + '/login'}"><i class="fas fa-user"></i></a>
+    <div th:if="${isUserLoggedIn}" class="d-flex flex-lg-row flex-column align-items-center justify-content-center">
+      <div class="dropdown-center mb-sm-3">
+        <button class="mt-md-0 btn pt-md-0 btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class="img-circle elevation-3" width="32" src="/img/avatars/user.png" th:src="${springUserPicUrl}" alt="User Profile Picture">
+        </button>
+        <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+          <li><h6 class="dropdown-header fsize-150 text-black" th:text="${springUserName}">User Name</h6></li>
+          <li><a class="dropdown-item user fsize-120" href="/dashboard" th:href="${baseUrl + '/dashboard'}">Dashboard</a></li>
+          <li><a class="dropdown-item user fsize-120" href="/dashboard/jobs" th:href="${baseUrl + '/dashboard/jobs'}">Jobs</a></li>
+          <li><a class="dropdown-item user fsize-120" href="/dashboard/work-shifts" th:href="${baseUrl + '/dashboard/work-shifts'}">Work Shifts</a></li>
+          <li><a class="dropdown-item user fsize-120" href="/dashboard/calculations" th:href="${baseUrl + '/dashboard/calculations'}">Calculations</a></li>
+          <li><a class="dropdown-item user fsize-120" href="/dashboard/profile" th:href="${baseUrl + '/dashboard/profile'}">Profile</a></li>
+          <li><hr class="dropdown-divider"><hr></li>
+          <li class="dropdown-item form-text-hover-white">
+            <form class="p-0 form-text-hover-white logout-form" action="/logout" th:action="${baseUrl + '/logout'}" method="POST">
+              <a class="logout-btn fsize-120 form-text-hover-white" href="#">Log out</a>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </header>
 </body>

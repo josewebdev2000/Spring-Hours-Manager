@@ -37,6 +37,7 @@ public class RegisterController
         {
             // Add Dynamic data to template
             model.addAttribute("baseUrl", UrlUtils.getBaseUrl());
+            model.addAttribute("isUserLoggedIn", false);
             model.addAttribute("pageTitle", "Register");
             model.addAttribute("pageDescription", "Hours Manager Web Application Register Page");
             model.addAttribute("pageKeywords", "working, hours, tracker, budget, calculations, manager, registration, register");

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
+<body>
+<div class="wrapper">
+    <!--Import Dashboard Header-->
+    <nav th:replace="~{fragments/dashboard-header.html :: dashboard-header}"></nav>
+    <!--Import Dashboard Sidebar-->
+    <aside th:replace="~{fragments/dashboard-sidebar.html :: dashboard-sidebar}"></aside>
+
+    <!--Import the Dashboard Preloader-->
+    <div th:replace="~{fragments/dashboard-preloader.html :: dashboard-preloader}"></div>
+
+    <!--Place content of the index page here-->
+    <div class="content-wrapper">
+    </div>
+</div>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
+</body>
+</html>

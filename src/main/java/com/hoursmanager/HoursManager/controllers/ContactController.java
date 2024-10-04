@@ -1,13 +1,20 @@
 package com.hoursmanager.HoursManager.controllers;
 
+import com.hoursmanager.HoursManager.enums.SessionAttribute;
 import com.hoursmanager.HoursManager.exceptions.EmailServiceException;
 import com.hoursmanager.HoursManager.forms.ContactInfo;
+import com.hoursmanager.HoursManager.models.SpringUser;
+import com.hoursmanager.HoursManager.repositories.SpringUserRepository;
 import com.hoursmanager.HoursManager.services.EmailService;
+import com.hoursmanager.HoursManager.utils.DbUtils;
+import com.hoursmanager.HoursManager.utils.SessionUtils;
 import com.hoursmanager.HoursManager.utils.TimeUtils;
 import com.hoursmanager.HoursManager.utils.UrlUtils;
 import com.hoursmanager.HoursManager.views.JsonPayloadErrorResponse;
 import com.hoursmanager.HoursManager.views.JsonPayloadSuccessResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,18 +26,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Map;
 
 @Controller
+@AllArgsConstructor
 public class ContactController
 {
     private final EmailService emailService;
-
-    public ContactController(EmailService emailService)
-    {
-        this.emailService = emailService;
-    }
+    private final SpringUserRepository springUserRepository;
 
     @GetMapping("/contact")
-    public String contact(Model model, HttpServletRequest request)
+    public String contact(Model model, HttpServletRequest request, HttpSession session)
     {
+        // Determine if the user is logged in
+        boolean isUserLoggedIn = SessionUtils.isSessionValueValid(session, "userId");
+
+        // If the user is logged in
+        if (isUserLoggedIn)
+        {
+            // Grab the user's ID
+            Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID.getKey());
+
+            // Grab the actual user
+            SpringUser springUser = springUserRepository.findById(userId).orElse(null);
+
+            // Grab the username
+            String springUserName = springUser.getSpringUserName();
+
+            // Grab the profile picture
+            String springUserProfilePic = DbUtils.getUserProfilePic(userId, springUserRepository, "/img/avatars/user.png");
+
+            // Add that to the model
+            model.addAttribute("springUserName", springUserName);
+            model.addAttribute("springUserPicUrl", springUserProfilePic);
+        }
+
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("baseUrl", UrlUtils.getBaseUrl());
         model.addAttribute("pageTitle", "Contact");
         model.addAttribute("pageDescription", "Hours Manager Web Application Contact Page");
