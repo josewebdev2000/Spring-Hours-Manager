@@ -4,15 +4,15 @@
 <header th:fragment="header">
   <h1><a class="silent-link purple-color purple-color-hover" href="/" th:src="${baseUrl} + '/'">HOURS MANAGER</a></h1>
   <nav>
-    <a class="mb-3" href="/" th:src="${baseUrl} + '/'">HOME</a>
+    <a class="mb-3" href="/" th:href="${baseUrl} + '/'">HOME</a>
 
-    <a class="mb-3" href="/about" th:src="${baseUrl + '/about'}">ABOUT</a>
+    <a class="mb-3" href="/about" th:href="${baseUrl + '/about'}">ABOUT</a>
 
-    <a class="mb-3" href="/contact" th:src="${baseUrl + '/contact'}">CONTACT</a>
+    <a class="mb-3" href="/contact" th:href="${baseUrl + '/contact'}">CONTACT</a>
 
-    <a class="mb-3" href="/privacy" th:src="${baseUrl + '/privacy'}">PRIVACY</a>
+    <a class="mb-3" href="/privacy" th:href="${baseUrl + '/privacy'}">PRIVACY</a>
     <!-- Add Conditional Rendering to show user dashboard when user is logged in -->
-    <a th:if="${!isUserLoggedIn}" href="/login" th:src="${baseUrl + '/login'}"><i class="fas fa-user"></i></a>
+    <a class="mb-3" th:if="${!isUserLoggedIn}" href="/login" th:src="${baseUrl + '/login'}"><i class="fas fa-user"></i></a>
     <div th:if="${isUserLoggedIn}" class="d-flex flex-lg-row flex-column align-items-center justify-content-center">
       <div class="dropdown-center mb-sm-3">
         <button class="mt-md-0 btn pt-md-0 btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

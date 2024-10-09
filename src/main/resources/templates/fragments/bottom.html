@@ -15,12 +15,15 @@
     <!--JS Helpers-->
     <script src="/js/helpers.js" th:src="${baseUrl + '/js/helpers.js'}"></script>
 
+    <!--JS OOP-->
+    <script src="/js/oop/PicGridSelector.js" th:src="${baseUrl + '/js/oop/PicGridSelector.js'}"></script>
+
     <!--Snippets-->
     <script src="/js/snippets/spinners/loading.js" th:src="${baseUrl + '/js/snippets/spinners/loading.js'}"></script>
     <script src="/js/snippets/alerts/error.js" th:src="${baseUrl + '/js/snippets/alerts/error.js'}"></script>
     <script src="/js/snippets/alerts/success.js" th:src="${baseUrl + '/js/snippets/alerts/success.js'}"></script>
 
-    <!--Condittionally Render Script to Logout-->
+    <!--Conditionally Render Script to Logout-->
     <script src="/js/logout.js" th:src="${baseUrl + '/js/logout.js'}"></script>
 
     <!--Conditionally Render Script for Contact Page-->
@@ -29,6 +32,13 @@
     <!--Conditionally Render Script for Register and Login Pages-->
     <script th:if="${request.getRequestURI().equals('/register')}" src="/js/register.js" th:src="${baseUrl + '/js/register.js'}"></script>
     <script th:if="${request.getRequestURI().equals('/login')}" src="/js/login.js" th:src="${baseUrl + '/js/login.js'}"></script>
+
+    <!--Conditionally Render Script for Forgot and Reset Password Pages-->
+    <script th:if="${request.getRequestURI().equals('/forgot-password')}" src="/js/forgot-password.js" th:src="${baseUrl + '/js/forgot-password.js'}"></script>
+    <script th:if="${request.getRequestURI().contains('/reset-password')}" src="/js/reset-password.js" th:src="${baseUrl + '/js/reset-password.js'}"></script>
+
+    <!--Conditionally Render Script for Profile Page-->
+    <script th:if="${request.getRequestURI().equals('/dashboard/profile')}" src="/js/profile.js" th:src="${baseUrl + '/js/profile.js'}"></script>
 </div>
 </body>
 </html>

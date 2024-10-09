@@ -5,6 +5,7 @@ import com.hoursmanager.HoursManager.enums.SessionAttribute;
 import com.hoursmanager.HoursManager.models.SpringUser;
 import com.hoursmanager.HoursManager.repositories.SpringUserRepository;
 import com.hoursmanager.HoursManager.utils.DbUtils;
+import com.hoursmanager.HoursManager.utils.StringFormattingUtils;
 import com.hoursmanager.HoursManager.utils.UrlUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/dashboard")
@@ -59,6 +61,7 @@ public class ProfileController
             model.addAttribute("pageDescription", "Hours Manager Web Application User Profile");
             model.addAttribute("pageKeywords", "working, hours, tracker, user, profile, settings, password change, forgot password");
             model.addAttribute("springUserName", springUserName);
+            model.addAttribute("springUserPossessiveName", StringFormattingUtils.getPossessiveNounFromName(springUserName));
             model.addAttribute("springUserEmail", springUserEmail);
             model.addAttribute("springUserPicUrl", springUserPicUrl);
             model.addAttribute("pageUrl", UrlUtils.getBaseUrl() + "/dashboard/profile");
@@ -68,5 +71,12 @@ public class ProfileController
 
         }
     }
+
+    // Make POST Routes to modify username, password, and avatar pic
+    /*
+    @PostMapping("/profile/usernameUpdate")
+    @PostMapping("/profile/avatarUpdate")
+    @PostMapping("/profile/passwordUpdate")
+     */
 
 }

@@ -4,6 +4,8 @@ import com.hoursmanager.HoursManager.dto.EmailDto;
 import com.hoursmanager.HoursManager.dto.EmailMicroRes;
 import com.hoursmanager.HoursManager.exceptions.EmailServiceException;
 import com.hoursmanager.HoursManager.forms.ContactInfo;
+import com.hoursmanager.HoursManager.forms.ForgotPasswordInfo;
+import com.hoursmanager.HoursManager.forms.ResetPasswordInfo;
 import com.hoursmanager.HoursManager.utils.CloudinaryImgUploader;
 import com.hoursmanager.HoursManager.utils.TimeUtils;
 
@@ -23,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.sql.Time;
 
 @Service
 public class EmailService
@@ -41,6 +44,15 @@ public class EmailService
 
     @Value("${email.service.html.template.admin.path}")
     private String adminEmailHtmlTemplatePath;
+
+    @Value("${email.service.html.template.forgot.password.template}")
+    private String forgotPasswordHtmlTemplatePath;
+
+    @Value("${email.service.html.template.generic.reset.password.template}")
+    private String genericResetPasswordHtmlTemplatePath;
+
+    @Value("${email.service.html.template.user.specific.reset.password.template}")
+    private String userSpecificResetPasswordHtmlTemplatePath;
 
     @Value("${cloudinary.api.cloud.name}")
     private String cloudinaryApiCloudName;
@@ -124,14 +136,41 @@ public class EmailService
         return adminTemplate;
     }
 
-    private String sendEmailFromJsonRequest(EmailDto emailDto) throws IOException, EmailServiceException
+    private String prepareForgotPasswordEmailForUser(String springUserEmail, String passwordResetToken, String date) throws IOException
+    {
+        // Grab the HTML content of the forgot password email
+        Resource resource = resourceLoader.getResource(forgotPasswordHtmlTemplatePath);
+        String emailTemplate = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
+
+        // Replace placeholders with actual data
+        emailTemplate = emailTemplate
+                .replace("{{EMAIL}}", springUserEmail)
+                .replace("{{RESET_PASSWORD_LINK}}", passwordResetToken)
+                .replace("{{DATE}}", date);
+
+        return emailTemplate;
+    }
+
+    private String prepareGenericResetPasswordEmailForUser(String date) throws IOException {
+        // Grab the HTML content of the generic reset password email
+        Resource resource = resourceLoader.getResource(genericResetPasswordHtmlTemplatePath);
+        String emailTemplate = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
+
+        // Replace placeholders with actual data
+        emailTemplate = emailTemplate
+                .replace("{{DATE}}", date);
+
+        return emailTemplate;
+    }
+
+    private String sendEmailFromJsonRequest(EmailDto emailDto) throws EmailServiceException
     {
         // Set request headers
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
 
         // Prepare the request to send
-        HttpEntity<EmailDto> requestEntity = new HttpEntity<>(emailDto, headers);
+        HttpEntity<EmailDto> requestEntity = new HttpEntity<EmailDto>(emailDto, headers);
 
         // Make the API request to send the email
         try
@@ -162,7 +201,7 @@ public class EmailService
         }
     }
 
-    public String sendAdminEmailToAdmin(ContactInfo contactInfo) throws IOException, EmailServiceException, Exception
+    public void sendAdminEmailToAdmin(ContactInfo contactInfo) throws IOException, EmailServiceException, Exception
     {
         // Validate contact info
         validateContactInfo(contactInfo);
@@ -183,7 +222,7 @@ public class EmailService
         );
 
         // Send the admin email
-        return sendEmailFromJsonRequest(emailDto);
+        sendEmailFromJsonRequest(emailDto);
     }
 
     public String sendContactEmailToUser(ContactInfo contactInfo) throws IOException, EmailServiceException
@@ -208,4 +247,44 @@ public class EmailService
         // Send the email already
         return sendEmailFromJsonRequest(emailDto);
     }
+
+    public String sendForgotPasswordEmailToUser(ForgotPasswordInfo forgotPasswordInfo, String passwordResetTokenLink) throws IOException, EmailServiceException
+    {
+        // Grab email content
+        String htmlEmailContent = prepareForgotPasswordEmailForUser(
+                forgotPasswordInfo.getEmail(),
+                passwordResetTokenLink,
+                TimeUtils.getCurrentDate()
+        );
+
+        // Prepare the JSON payload to send to the microservice
+        EmailDto emailDto = new EmailDto(
+                emailServiceApiKey,
+                forgotPasswordInfo.getEmail(),
+                "Hours Manager Forgot Password Request",
+                htmlEmailContent
+        );
+
+        // Send the email already
+        return sendEmailFromJsonRequest(emailDto);
+    }
+
+    public void sendGenericResetPasswordEmailToUser(String springUserEmail) throws IOException, EmailServiceException
+    {
+        // Grab email content
+        String htmlContent = prepareGenericResetPasswordEmailForUser(
+                TimeUtils.getCurrentDate()
+        );
+
+        // Prepare the JSON payload to send to the microservice
+        EmailDto emailDto = new EmailDto(
+                emailServiceApiKey,
+                springUserEmail,
+                "Hours Manager Reset Password Request Accepted",
+                htmlContent
+        );
+
+        sendEmailFromJsonRequest(emailDto);
+    }
 }
+

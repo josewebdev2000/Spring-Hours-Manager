@@ -142,4 +142,35 @@ public class SpringUserRepoImp
         }
     }
 
+    public void updatePassword(SpringUser springUser, String newPassword) throws ValidationError, DbException
+    {
+        // Validate the new password
+        try
+        {
+            if (!PasswordValidator.isValidPassword(newPassword))
+            {
+                throw new ValidationError("Invalid Password Format");
+            }
+
+            // Hash the new password
+            String newPasswordHash = PasswordHasher.getHashedPassword(newPassword);
+
+            // Set the new Hashed Password for the User
+            springUser.setSpringUserPassword(newPasswordHash);
+
+            // Save changes
+            springUserRepository.save(springUser);
+        }
+
+        catch (ValidationError e)
+        {
+            throw e;
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw new DbException("Failed to change the password due to a database error");
+        }
+    }
 }

@@ -41,7 +41,7 @@
     <link rel="stylesheet" th:if="${request.getRequestURI().contains('/dashboard')}" href="/css/dashboard.css" th:href="${baseUrl + '/css/dashboard.css'}">
 
     <!--Conditionally Attach Login and Register StyleSheets to their routes-->
-    <link rel="stylesheet" th:if="${request.getRequestURI().equals('/login')}" href="/css/login.css" th:href="${baseUrl + '/css/login.css'}">
+    <link rel="stylesheet" th:if="${request.getRequestURI().equals('/login') || request.getRequestURI().equals('/forgot-password') || request.getRequestURI().contains('/reset-password')}" href="/css/login.css" th:href="${baseUrl + '/css/login.css'}">
     <link rel="stylesheet" th:if="${request.getRequestURI().equals('/register')}" href="/css/register.css" th:href="${baseUrl + '/css/register.css'}">
 
     <!--Dependency DOM Scripts-->

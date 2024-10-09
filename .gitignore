@@ -6,6 +6,7 @@ target/
 
 # Ignore .env vars
 .env
+plan.txt
 
 # Ignore application.properties
 /src/main/resources/application.properties

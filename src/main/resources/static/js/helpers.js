@@ -94,18 +94,6 @@ function emailValidate(email_id)
     }
 }
 
-function redirectToDashboard()
-{
-    const referrer = document.referrer;
-
-    if (referrer) {
-        window.location.href = referrer;
-    } else {
-        // If there is no referrer, you can redirect to a default page
-        window.location.href = `${websiteURL}dashboard/index.php`;
-    }
-}
-
 function passwordValidate(password_input_id)
 {
     const curPassword = $(`#${password_input_id}`).val();
@@ -130,6 +118,19 @@ function passwordValidate(password_input_id)
         $(`.invalid-tooltip.${password_input_id}`).text("");
         $(`#${password_input_id}`).addClass("is-valid");
     }
+}
+
+function convertHexToRGB(hex) {
+    // Remove the hash at the start if it's there
+    hex = hex.replace(/^#/, '');
+
+    // Parse the r, g, b values
+    let bigint = parseInt(hex, 16);
+    let r = (bigint >> 16) & 255;
+    let g = (bigint >> 8) & 255;
+    let b = bigint & 255;
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 function confirmPasswordValidate(confirm_id, ori_id)

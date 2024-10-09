@@ -49,6 +49,9 @@ public class SpringUser
     @Column(name="SpringUserPicUrl", nullable = true)
     private String springUserPicUrl;
 
+    @OneToMany(mappedBy="passwordTokenUser", cascade = CascadeType.ALL)
+    private List<PasswordResetToken> passwordResetTokens;
+
     @OneToMany(mappedBy="companyUser", cascade = CascadeType.ALL)
     private List<Company> companies;
 
