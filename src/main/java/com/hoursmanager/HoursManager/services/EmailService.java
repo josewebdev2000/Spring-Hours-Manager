@@ -163,6 +163,20 @@ public class EmailService
         return emailTemplate;
     }
 
+    private String prepareUserSpecificResetPasswordEmailForUser(String springUserName, String date) throws IOException
+    {
+        // Grab the HTML content of the generic reset password email
+        Resource resource = resourceLoader.getResource(userSpecificResetPasswordHtmlTemplatePath);
+        String emailTemplate = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
+
+        // Replace placeholder with actual data
+        emailTemplate = emailTemplate
+                .replace("{{NAME}}", springUserName)
+                .replace("{{DATE}}", date);
+
+        return emailTemplate;
+    }
+
     private String sendEmailFromJsonRequest(EmailDto emailDto) throws EmailServiceException
     {
         // Set request headers
@@ -248,7 +262,7 @@ public class EmailService
         return sendEmailFromJsonRequest(emailDto);
     }
 
-    public String sendForgotPasswordEmailToUser(ForgotPasswordInfo forgotPasswordInfo, String passwordResetTokenLink) throws IOException, EmailServiceException
+    public void sendForgotPasswordEmailToUser(ForgotPasswordInfo forgotPasswordInfo, String passwordResetTokenLink) throws IOException, EmailServiceException
     {
         // Grab email content
         String htmlEmailContent = prepareForgotPasswordEmailForUser(
@@ -266,7 +280,7 @@ public class EmailService
         );
 
         // Send the email already
-        return sendEmailFromJsonRequest(emailDto);
+        sendEmailFromJsonRequest(emailDto);
     }
 
     public void sendGenericResetPasswordEmailToUser(String springUserEmail) throws IOException, EmailServiceException
@@ -286,5 +300,25 @@ public class EmailService
 
         sendEmailFromJsonRequest(emailDto);
     }
+
+    public void sendUserSpecificResetPasswordEmailToUser(String springUserEmail, String springUserName) throws IOException, EmailServiceException
+    {
+        // Grab email content
+        String htmlContent = prepareUserSpecificResetPasswordEmailForUser(
+                springUserName,
+                TimeUtils.getCurrentDate()
+        );
+
+        // Prepare the JSON payload to send to the microservice
+        EmailDto emailDto = new EmailDto(
+                emailServiceApiKey,
+                springUserEmail,
+                "Hours Manager Reset Password Request Accepted",
+                htmlContent
+        );
+
+        sendEmailFromJsonRequest(emailDto);
+    }
 }
+
 

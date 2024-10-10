@@ -38,7 +38,7 @@
     <script th:if="${request.getRequestURI().contains('/reset-password')}" src="/js/reset-password.js" th:src="${baseUrl + '/js/reset-password.js'}"></script>
 
     <!--Conditionally Render Script for Profile Page-->
-    <script th:if="${request.getRequestURI().equals('/dashboard/profile')}" src="/js/profile.js" th:src="${baseUrl + '/js/profile.js'}"></script>
+    <script th:if="${request.getRequestURI().equals('/dashboard/profile')}" src="/js/dashboard/profile.js" th:src="${baseUrl + '/js/dashboard/profile.js'}"></script>
 </div>
 </body>
 </html>

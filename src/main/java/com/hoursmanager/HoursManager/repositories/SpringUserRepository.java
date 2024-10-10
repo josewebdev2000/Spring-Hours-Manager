@@ -9,4 +9,6 @@ public interface SpringUserRepository extends JpaRepository<SpringUser, Long>
 {
     // Method to find user by email
     SpringUser findSpringUserBySpringUserEmail(String springUserEmail);
+
+    // Method to update user's profile Picture
 }

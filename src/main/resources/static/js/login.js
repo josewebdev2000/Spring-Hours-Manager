@@ -109,10 +109,7 @@ function validateAndSubmitLoginForm()
                 }
             });
         }
-
     });
-
-
 }
 
 $(document).ready(mainLogin);

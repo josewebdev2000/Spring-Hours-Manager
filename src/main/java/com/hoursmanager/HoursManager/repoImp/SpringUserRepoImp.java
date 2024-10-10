@@ -13,6 +13,7 @@ import com.hoursmanager.HoursManager.utils.PasswordHasher;
 import com.hoursmanager.HoursManager.validators.EmailValidator;
 import com.hoursmanager.HoursManager.validators.NameValidator;
 import com.hoursmanager.HoursManager.validators.PasswordValidator;
+import com.hoursmanager.HoursManager.validators.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -171,6 +172,64 @@ public class SpringUserRepoImp
         {
             e.printStackTrace();
             throw new DbException("Failed to change the password due to a database error");
+        }
+    }
+
+    public void updateSpringUserName(SpringUser springUser, String springUserName) throws ValidationError, DbException
+    {
+        try
+        {
+            // Validate the username
+            if (!NameValidator.isValidName(springUserName))
+            {
+                throw new ValidationError("Invalid Name Format");
+            }
+
+            // Set the new username for the user
+            springUser.setSpringUserName(springUserName);
+
+            // Save changes in the repository
+            springUserRepository.save(springUser);
+        }
+
+        catch (ValidationError e)
+        {
+            throw e;
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw new DbException("Could not change the username due to a database error");
+        }
+    }
+
+    public void updateProfilePicture(SpringUser springUser, String newPicUrl) throws ValidationError, DbException
+    {
+        try
+        {
+            // Validate the picUrl
+            if (!UrlValidator.isValidUrl(newPicUrl))
+            {
+                throw new ValidationError("Invalid URL Format");
+            }
+
+            // Set the new PicUrl for the user
+            springUser.setSpringUserPicUrl(newPicUrl);
+
+            // Save the changes
+            springUserRepository.save(springUser);
+        }
+
+        catch (ValidationError e)
+        {
+            throw e;
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw new DbException("Failed to change profile picture due to a database error");
         }
     }
 }
