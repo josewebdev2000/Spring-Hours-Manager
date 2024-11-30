@@ -232,4 +232,18 @@ public class SpringUserRepoImp
             throw new DbException("Failed to change profile picture due to a database error");
         }
     }
+
+    public void deleteSpringUser(SpringUser springUser) throws DbException
+    {
+        try
+        {
+            springUserRepository.delete(springUser);
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw new DbException("Failed to delete profile due to a database error");
+        }
+    }
 }

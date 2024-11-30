@@ -54,7 +54,7 @@
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
                                         <b>Jobs Registered</b>
-                                        <a class="float-right">3</a>
+                                        <a class="float-right" th:text="${numOfSpringUserJobs}">0</a>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Total Hours Worked</b>
@@ -77,8 +77,8 @@
                             </div>
                             <div class="card-body">
                                 <p class="mt-3 d-flex flex-column">
-                                    <button class="btn btn-outline-info btn-block" id="btn-delete-account-data">Delete Account Data</button>
-                                    <button class="btn btn-outline-danger btn-block" id="btn-delete-account">Delete Account</button>
+                                    <button type="button" class="btn btn-outline-info btn-block" id="btn-delete-account-data" data-bs-toggle="modal" data-bs-target="#modal-delete-account-data">Delete Account Data</button>
+                                    <button type="button" class="btn btn-outline-danger btn-block" id="btn-delete-account" data-bs-toggle="modal" data-bs-target="#modal-delete-account">Delete Account</button>
                                 </p>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                                                     <div class="row d-flex justify-content-center align-items-center">
                                                         <!-- Loop through avatar images-->
                                                         <div class="col-lg-3 col-md-4 col-sm-6 col-12 text-center p-2 m-2" th:each="i: ${#numbers.sequence(1, 12)}">
-                                                            <img id="avatar" class="avatar" th:id="${'avatar-' + i }" src="/img/avatars/avatar-1.png" th:src="${baseUrl + '/img/avatars/avatar-' + i + '.png'}" alt="Avatar" th:alt="${'Avatar ' + i}">
+                                                            <img id="avatar" class="avatar" th:id="${'avatar-' + i }" src="https://raw.githubusercontent.com/josewebdev2000/Spring-Hours-Manager/refs/heads/main/src/main/resources/static/img/avatars/avatar-1.png" th:src="${'https://raw.githubusercontent.com/josewebdev2000/Spring-Hours-Manager/refs/heads/main/src/main/resources/static/img/avatars/avatar-' + i + '.png'}" alt="Avatar" th:alt="${'Avatar ' + i}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,6 +169,7 @@
                                                 <label for="password" class="col-md-2 col-form-label text-nowrap">Password</label>
                                                 <div class="col-md-10">
                                                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter your new password here">
+                                                    <span id="profile-password-icon" class="bi bi-eye-fill" style="position: absolute; bottom: 15%; left: 90%;"></span>
                                                     <div class="valid-tooltip password">New Password Looks Good</div>
                                                     <div class="invalid-tooltip password"></div>
                                                 </div>
@@ -200,6 +201,50 @@
                 </div>
             </div>
         </section>
+    </div>
+</div>
+<!--Div that contains modals-->
+<div class="modals">
+    <!--Modal to delete account data-->
+    <div id="modal-delete-account-data" class="modal fade" tabindex="-1" aria-hidden="true" aria-labelledby="modal-delete-account-data-title">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal-delete-account-data-title">Delete Account Data Confirmation Request</h1>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This action is <span class="text-danger">PERMANENT</span>.</p>
+                    <p>It'll be as if you just logged in <em><b>HoursManager</b></em> for the first time</p>
+                    <p>Are you sure you want to continue?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-default" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-info" type="button" id="modal-btn-delete-account-data">Delete Account Data Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal to delete account-->
+    <div id="modal-delete-account" class="modal fade" tabindex="-1" aria-hidden="true" aria-labelledby="modal-delete-account-title">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal-delete-account-title">Delete Account Confirmation Request</h1>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This action is <span class="text-danger">PERMANENT</span>.</p>
+                    <p>You'll no longer be able to use this account again</p>
+                    <p>Are you sure you want to continue?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-default" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-danger" type="button" id="modal-btn-delete-account">Delete Account Now</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--Body Scripts-->

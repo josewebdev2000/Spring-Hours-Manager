@@ -10,6 +10,7 @@ import com.hoursmanager.HoursManager.forms.ProfilePicUrlInfo;
 import com.hoursmanager.HoursManager.forms.UsernameUpdateInfo;
 import com.hoursmanager.HoursManager.models.SpringUser;
 import com.hoursmanager.HoursManager.repoImp.SpringUserRepoImp;
+import com.hoursmanager.HoursManager.repositories.JobRepository;
 import com.hoursmanager.HoursManager.repositories.SpringUserRepository;
 import com.hoursmanager.HoursManager.services.EmailService;
 import com.hoursmanager.HoursManager.utils.DbUtils;
@@ -18,7 +19,9 @@ import com.hoursmanager.HoursManager.utils.UrlUtils;
 import com.hoursmanager.HoursManager.views.JsonPayloadErrorResponse;
 import com.hoursmanager.HoursManager.views.JsonPayloadRedirectUrl;
 import com.hoursmanager.HoursManager.views.JsonPayloadSuccessResponse;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
@@ -31,6 +34,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.Map;
@@ -45,6 +49,9 @@ public class ProfileController
 
     @Autowired
     private final SpringUserRepository springUserRepository;
+
+    @Autowired
+    private final JobRepository jobRepository;
 
     @Autowired
     private final SpringUserRepoImp springUserRepoImp;
@@ -81,6 +88,9 @@ public class ProfileController
             // Grab the user's profile picture
             String springUserPicUrl = DbUtils.getUserProfilePic(userId, springUserRepository, "/img/avatars/user.png");
 
+            // Grab the number of jobs per user
+            Long numOfSpringUserJobs = jobRepository.countBySpringUser(springUser);
+
             // Add Dynamic data to the template
             model.addAttribute("baseUrl", UrlUtils.getBaseUrl());
             model.addAttribute("pageTitle", "User Profile");
@@ -90,6 +100,7 @@ public class ProfileController
             model.addAttribute("springUserPossessiveName", StringFormattingUtils.getPossessiveNounFromName(springUserName));
             model.addAttribute("springUserEmail", springUserEmail);
             model.addAttribute("springUserPicUrl", springUserPicUrl);
+            model.addAttribute("numOfSpringUserJobs", numOfSpringUserJobs);
             model.addAttribute("pageUrl", UrlUtils.getBaseUrl() + "/dashboard/profile");
             model.addAttribute("request", request);
 
@@ -215,5 +226,46 @@ public class ProfileController
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new JsonPayloadErrorResponse(e.getMessage()).getPayload());
             }
         }
+    }
+
+    @PostMapping("/profile/deleteSpringUser")
+    public ResponseEntity<Map<String, String>> deleteSpringUserProfile(HttpSession session, HttpServletResponse response, UriComponentsBuilder uriBuilder)
+    {
+        // Verify we can extract the SpringUser ID from the session
+        if (session.getAttribute(SessionAttribute.USER_ID.getKey()) == null)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new JsonPayloadErrorResponse("You must be logged in to delete your account").getPayload());
+        }
+
+        try
+        {
+
+            // Grab the userId
+            Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID.getKey());
+            SpringUser springUser = springUserRepository.findById(userId).orElse(null);
+
+            // Delete the user
+            springUserRepoImp.deleteSpringUser(springUser);
+
+            // Invalidate the session
+            session.invalidate();
+
+            // Remove JSESSION Cookie from the browser
+            Cookie jSessionCookie = new Cookie("JSESSIONID", null);
+            jSessionCookie.setPath("/");
+            jSessionCookie.setHttpOnly(true);
+            jSessionCookie.setMaxAge(0);
+            response.addCookie(jSessionCookie);
+
+            // Send payload to redirect Home
+            String homeUri = uriBuilder.path(RedirectUrl.HOME.getRedirectUrl()).build().toUriString();
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonPayloadRedirectUrl(homeUri).getPayload());
+        }
+
+        catch (DbException e)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new JsonPayloadErrorResponse(e.getMessage()).getPayload());
+        }
+
     }
 }

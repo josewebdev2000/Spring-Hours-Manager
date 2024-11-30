@@ -5,7 +5,6 @@ import com.hoursmanager.HoursManager.dto.EmailMicroRes;
 import com.hoursmanager.HoursManager.exceptions.EmailServiceException;
 import com.hoursmanager.HoursManager.forms.ContactInfo;
 import com.hoursmanager.HoursManager.forms.ForgotPasswordInfo;
-import com.hoursmanager.HoursManager.forms.ResetPasswordInfo;
 import com.hoursmanager.HoursManager.utils.CloudinaryImgUploader;
 import com.hoursmanager.HoursManager.utils.TimeUtils;
 
@@ -25,7 +24,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.sql.Time;
 
 @Service
 public class EmailService

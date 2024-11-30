@@ -2,6 +2,9 @@
 
 function mainProfile()
 {
+    // Profile Password Shower
+    initProfilePasswordShower();
+
     // Operations to change the username
     updateProfileUsername();
 
@@ -10,7 +13,54 @@ function mainProfile()
 
     // Operations to change the password
     updateProfilePassword();
+
+    // Operations to delete the user
+    sendDeleteAccountRequest();
 }
+
+function initProfilePasswordShower()
+{
+    new PasswordShower(
+        "profile-password-icon",
+        "password",
+        "bi bi-eye-slash-fill",
+        "bi bi-eye-fill"
+    );
+}
+
+function sendDeleteAccountRequest()
+{
+    // Grab the modal button to delete the account
+    const modalBtnDeleteAccount = $("#modal-btn-delete-account");
+
+    // Check clicked, send the POST request
+    modalBtnDeleteAccount.on("click", function() {
+        // Send AJAX Request
+        $.ajax({
+            url: `${websiteURL}/dashboard/profile/deleteSpringUser`,
+            method: "POST",
+            beforeSend: function() {
+                // Disable Button to avoid request before response
+                const btnToDisable = $("#modal-btn-delete-account");
+                btnToDisable.prop("disabled", true);
+            },
+            success: function(response) {
+                // Send the user to the dashboard
+                location.replace(response["redirectUrl"]);
+            },
+            error: function(xhr)
+            {
+                displayFormErrorAlert("profile-username-alerts-container", xhr.responseJSON["error"]);
+            },
+            complete: function() {
+                // Enable Button to avoid request before response
+                const btnToDisable = $("#modal-btn-delete-account");
+                btnToDisable.prop("disabled", false);
+            }
+        });
+    });
+}
+
 function updateProfileUsername()
 {
     // Detect if the Username Form is shown

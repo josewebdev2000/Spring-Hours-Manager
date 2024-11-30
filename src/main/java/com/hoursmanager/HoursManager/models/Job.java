@@ -30,16 +30,16 @@ public class Job
     @Column(name = "jobDescription", nullable = true)
     private String jobDescription;
 
-    @OneToMany(mappedBy="payRateJob", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="payRateJob", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PayRate> payRates;
 
-    @OneToMany(mappedBy="payCheckJob", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="payCheckJob", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PayCheck> payChecks;
 
-    @OneToMany(mappedBy="workingDayJob", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="workingDayJob", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkingDay> workingDays;
 
-    @OneToMany(mappedBy="workSessionJob", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="workSessionJob", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkSession> workSessions;
 
     @ManyToOne

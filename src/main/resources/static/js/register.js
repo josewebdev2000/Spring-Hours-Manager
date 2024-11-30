@@ -2,11 +2,31 @@
 
 function mainRegister()
 {
+    // Initialize Password Showers for this page
+    initRegisterPasswordShowers();
+
     // Reset register form on reload
     resetRegisterForm();
 
     // Validate and submit register form
     validateAndSubmitRegisterForm();
+}
+
+function initRegisterPasswordShowers()
+{
+    new PasswordShower(
+        "register-password-icon",
+        "password",
+        "bi bi-eye-slash-fill",
+        "bi bi-eye-fill"
+    );
+
+    new PasswordShower(
+        "register-confirm-password-icon",
+        "confirm_password",
+        "bi bi-eye-slash-fill",
+        "bi bi-eye-fill"
+    );
 }
 
 function resetRegisterForm()

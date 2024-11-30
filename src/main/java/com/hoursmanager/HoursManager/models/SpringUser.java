@@ -49,24 +49,24 @@ public class SpringUser
     @Column(name="SpringUserPicUrl", nullable = true)
     private String springUserPicUrl;
 
-    @OneToMany(mappedBy="passwordTokenUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="passwordTokenUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PasswordResetToken> passwordResetTokens;
 
-    @OneToMany(mappedBy="companyUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="companyUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Company> companies;
 
-    @OneToMany(mappedBy="jobUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="jobUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Job> jobs;
 
-    @OneToMany(mappedBy="payCheckUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="payCheckUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PayCheck> payChecks;
 
-    @OneToMany(mappedBy="payRateUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="payRateUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PayRate> payRates;
 
-    @OneToMany(mappedBy="workingDayUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="workingDayUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkingDay> workingDays;
 
-    @OneToMany(mappedBy="workSessionUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="workSessionUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkSession> workSessions;
 }

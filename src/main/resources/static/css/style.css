@@ -134,6 +134,13 @@ body {
     width: 100%;
 }
 
+.password-icon
+{
+    position: absolute;
+    top: 57%;
+    left: 83%;
+}
+
 /* Adjust width for medium screens */
 @media (min-width: 576px) {
     .hero

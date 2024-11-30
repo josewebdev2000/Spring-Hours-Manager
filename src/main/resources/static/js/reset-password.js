@@ -2,6 +2,9 @@
 
 function mainResetPassword()
 {
+    // Init Reset Password Showers
+    initResetPasswordPasswordShowers();
+
     // Reset password form on reload
     resetResetPasswordForm();
 
@@ -15,6 +18,23 @@ function resetResetPasswordForm()
         $("#password").val("");
         $("#confirm_password").val("");
     });
+}
+
+function initResetPasswordPasswordShowers()
+{
+    new PasswordShower(
+        "reset-password-icon",
+        "password",
+        "bi bi-eye-slash-fill",
+        "bi bi-eye-fill"
+    );
+
+    new PasswordShower(
+        "reset-confirm-password-icon",
+        "confirm_password",
+        "bi bi-eye-slash-fill",
+        "bi bi-eye-fill"
+    );
 }
 
 /* Write Code for Front-End Reset Password Form Validation and AJAX Sending */
@@ -99,6 +119,8 @@ function validateAndSubmitResetPasswordForm()
                 },
                 success: function(response) {
                     displayFormSuccessAlert("form-alerts-container", response["success"]);
+                    $("#key-link").prop("href", "/login");
+                    $("#key-link").text("Go to Login Page");
                 },
                 error: function(xhr) {
                     displayFormErrorAlert("form-alerts-container", xhr.responseJSON["error"]);

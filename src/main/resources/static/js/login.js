@@ -2,11 +2,24 @@
 
 function mainLogin()
 {
+    // Initialize Password Shower
+    initLoginPasswordShower();
+
     // Reset login form on reload
     resetLoginForm();
 
     // validate and submit login form
     validateAndSubmitLoginForm();
+}
+
+function initLoginPasswordShower()
+{
+    new PasswordShower(
+        "login-password-icon",
+        "password",
+        "bi bi-eye-slash-fill",
+        "bi bi-eye-fill"
+    );
 }
 
 function resetLoginForm()
