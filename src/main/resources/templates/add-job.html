@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
+<body>
+<div class="wrapper">
+    <!--Import Dashboard Header-->
+    <nav th:replace="~{fragments/dashboard-header.html :: dashboard-header}"></nav>
+    <!--Import Dashboard Sidebar-->
+    <aside th:replace="~{fragments/dashboard-sidebar.html :: dashboard-sidebar}"></aside>
+
+    <!--Import the Dashboard Preloader-->
+    <div th:replace="~{fragments/dashboard-preloader.html :: dashboard-preloader}"></div>
+
+    <!--Place content of the index page here-->
+    <div class="content-wrapper">
+        <input type="hidden"  id="user_id" th:value="${springUserId}">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Add New Job</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="${baseUrl + '/dashboard'}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Job</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="text-left mt-3">
+                            <a th:href="${baseUrl + '/dashboard/jobs'}" href="/dashboard/jobs" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-maroon">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-user-tie mr-sm-3"></i>
+                                    <span>Employer</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="company-name">Company Name</label>
+                                    <input type="text" class="form-control" name="company-name" id="company-name">
+                                    <div class="valid-tooltip company-name">Company Name Looks Good</div>
+                                    <div class="invalid-tooltip company-name">An Company Name Is Required</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company-email">Company Email</label>
+                                    <input type="email" class="form-control" name="company-email" id="company-email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company-phone-number">Company Phone Number</label>
+                                    <input type="tel" class="form-control" name="company-phone-number" id="company-phone-number" value="+1 (___) ___ - ____" mask="+1 (___) ___ - ____" placeholder="+1 (___) ___ - ____">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-dollar-sign mr-sm-3"></i>
+                                    <span>Pay Rate</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="rate-type">Rate Type</label>
+                                    <select name="rate-type" id="rate-type" class="form-select">
+                                        <option value="hourly">Hourly</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="biweekly">Biweekly</option>
+                                        <option value="monthly">Monthly</option>
+                                    </select>
+                                    <div class="valid-tooltip rate-type">Rate Type Looks Good</div>
+                                    <div class="invalid-tooltip rate-type">A Rate Type Must Be Chosen</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="rate-amount">Rate Amount</label>
+                                    <input type="number" class="form-control" name="rate-amount" id="rate-amount" min="1">
+                                    <div class="valid-tooltip rate-amount">Rate Amount Looks Good</div>
+                                    <div class="invalid-tooltip rate-amount">A Rate Amount Must Be Given</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-pink">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-suitcase mr-sm-3"></i>
+                                    <span>Job</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="job-name">Job Name</label>
+                                    <input type="text" class="form-control" name="job-name" id="job-name">
+                                    <div class="valid-tooltip job-name">Job Name Title Looks Good</div>
+                                    <div class="invalid-tooltip job-name">Job Name Is A Required Field</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="job-description">Job Description</label>
+                                    <textarea type="text" class="form-control" name="job-description" id="job-description" rows="4"></textarea>
+                                    <div class="valid-tooltip job-description">Job Description Looks Good</div>
+                                    <div class="invalid-tooltip job-description">Job Description Is A Required Field</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-purple">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-money-bill mr-sm-3"></i>
+                                    <span>Pay Check</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="payment-day">Payment Day</label>
+                                    <select class="form-select" name="payment-day" id="payment-day">
+                                        <option value="monday">Monday</option>
+                                        <option value="tuesday">Tuesday</option>
+                                        <option value="wednesday">Wednesday</option>
+                                        <option value="thursday">Thursday</option>
+                                        <option value="friday">Friday</option>
+                                        <option value="saturday">Saturday</option>
+                                        <option value="sunday">Sunday</option>
+                                    </select>
+                                    <div class="valid-tooltip payment-day">Payment Day Looks Good</div>
+                                    <div class="invalid-tooltip payment-day">Please Choose A Valid Day</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="total-pay">Predicted Total Payment</label>
+                                    <input type="number" class="form-control" name="total-pay" id="total-pay" min="1">
+                                    <div class="valid-tooltip total-pay">Predicted Total Payment Looks Good</div>
+                                    <div class="invalid-tooltip total-pay">Predicted Total Payment Is A Required Field</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tip-amount">Tips</label>
+                                    <input type="number" class="form-control" name="tip-amount" id="tip-amount" min="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="btn-group w-100" role="group">
+                            <a id="add-job-cancel-btn" class="btn btn-danger btn-lg" th:href="${baseUrl + '/dashboard/jobs'}">Cancel</a>
+                            <button id="add-job-new-btn" class="btn btn-success btn-lg">Add New Job</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
+</body>
+</html>

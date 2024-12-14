@@ -253,6 +253,12 @@ function displayFormSuccessAlert(alert_container_id, success_msg, doAppend = tru
     setTimeout(() => sAlert.addClass("show"), 150);
 }
 
+function initializePhoneMask()
+{
+    const phoneInputSelectorSlug = "input[type='tel'";
+    (new phoneMask()).init(phoneInputSelectorSlug);
+}
+
 function removeAlertFromContainer(alert_container_id, alert_selector)
 {
     $(`#${alert_container_id}`).find(alert_selector).remove();

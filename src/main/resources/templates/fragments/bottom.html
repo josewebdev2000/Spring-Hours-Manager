@@ -40,6 +40,9 @@
 
     <!--Conditionally Render Script for Profile Page-->
     <script th:if="${request.getRequestURI().equals('/dashboard/profile')}" src="/js/dashboard/profile.js" th:src="${baseUrl + '/js/dashboard/profile.js'}"></script>
+
+    <!--Conditionally Render for Job-->
+    <script th:if="${request.getRequestURI().equals('/dashboard/job')}" src="/js/job/job-add.js" th:src="${baseUrl + '/js/job/job-add.js'}"></script>
 </div>
 </body>
 </html>

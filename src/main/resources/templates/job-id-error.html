@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
+<body>
+<div class="wrapper">
+    <!--Import Dashboard Header-->
+    <nav th:replace="~{fragments/dashboard-header.html :: dashboard-header}"></nav>
+    <!--Import Dashboard Sidebar-->
+    <aside th:replace="~{fragments/dashboard-sidebar.html :: dashboard-sidebar}"></aside>
+
+    <!--Import the Dashboard Preloader-->
+    <div th:replace="~{fragments/dashboard-preloader.html :: dashboard-preloader}"></div>
+
+    <!--Place content of the index page here-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="text-danger">Job Id Error</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="${baseUrl + '/dashboard'}" href="/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Job</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="error-page">
+                <div class="headline text-danger">400</div>
+                <div class="error-content">
+                    <h3 class="mb-4">
+                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                        Bad Request
+                    </h3>
+                    <h4>Invalid Id Parameter</h4>
+                    <p>The <b>id</b> parameter was either not specified or invalid.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
+</body>
+</html>
