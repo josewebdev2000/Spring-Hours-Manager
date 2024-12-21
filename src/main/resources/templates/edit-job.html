@@ -1,10 +1,203 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
 <body>
+<div class="wrapper">
+    <!--Import Dashboard Header-->
+    <nav th:replace="~{fragments/dashboard-header.html :: dashboard-header}"></nav>
+    <!--Import Dashboard Sidebar-->
+    <aside th:replace="~{fragments/dashboard-sidebar.html :: dashboard-sidebar}"></aside>
 
+    <!--Import the Dashboard Preloader-->
+    <div th:replace="~{fragments/dashboard-preloader.html :: dashboard-preloader}"></div>
+
+    <!--Place content of the index page here-->
+    <div class="content-wrapper" id="edit-job-page-content-wrapper">
+        <input type="hidden"  id="edit_user_id" th:value="${springUserId}">
+        <input type="hidden" id="edit_job_id" th:value="${jobId}">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Edit Job</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="${baseUrl + '/dashboard'}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Job</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="text-left mt-3">
+                            <a th:href="${baseUrl + '/dashboard/jobs'}" href="/dashboard/jobs" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-maroon">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-user-tie mr-sm-3"></i>
+                                    <span>Company</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="edit-company-name">Company Name</label>
+                                    <input type="text" class="form-control" name="edit-company-name" id="edit-company-name" th:value="${companyName}">
+                                    <div class="valid-tooltip company-name">Company Name Looks Good</div>
+                                    <div class="invalid-tooltip company-name">Company Name Is Required</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="edit-company-email">Company Email</label>
+                                    <input type="email" class="form-control" name="edit-company-email" id="edit-company-email" th:value="${companyEmail}">
+                                    <div class="valid-tooltip company-email">Company Email Looks Good</div>
+                                    <div class="invalid-tooltip company-email">Company Email Is Invalid</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="edit-company-phone-number">Company Phone Number</label>
+                                    <input type="text" class="form-control" name="edit-company-phone-number" id="edit-company-phone-number" value="+1 (___) ___ - ____" mask="+1 (___) ___ - ____" placeholder="+1 (___) ___ - ____" th:value="${companyPhoneNumber}">
+                                    <div class="valid-tooltip company-phone-number">Company Phone Number Looks Good</div>
+                                    <div class="invalid-tooltip company-phone-number">Company Phone Number is Invalid</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-dollar-sign mr-sm-3"></i>
+                                    <span>Pay Rate</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="edit-rate-type">Rate Type</label>
+                                    <select name="edit-rate-type" id="edit-rate-type" class="form-select">
+                                        <option value="hourly" th:selected="${payRateType.toLowerCase() == 'hourly' ? true : false}">Hourly</option>
+                                        <option value="daily" th:selected="${payRateType.toLowerCase() == 'daily' ? true : false}">Daily</option>
+                                        <option value="weekly" th:selected="${payRateType.toLowerCase() == 'weekly' ? true : false}">Weekly</option>
+                                        <option value="biweekly" th:selected="${payRateType.toLowerCase() == 'biweekly' ? true : false}">Biweekly</option>
+                                        <option value="monthly" th:selected="${payRateType.toLowerCase() == 'monthly' ? true : false}">Monthly</option>
+                                    </select>
+                                    <div class="valid-tooltip rate-type">Rate Type Looks Good</div>
+                                    <div class="invalid-tooltip rate-type">A Rate Type Must Be Chosen</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="edit-rate-amount">Rate Amount</label>
+                                    <input type="number" class="form-control" name="edit-rate-amount" id="edit-rate-amount" min="1" th:value="${payRateAmount}">
+                                    <div class="valid-tooltip rate-amount">Rate Amount Looks Good</div>
+                                    <div class="invalid-tooltip rate-amount">A Rate Amount Must Be Given</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-pink">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-suitcase mr-sm-3"></i>
+                                    <span>Job</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="edit-job-name">Job Name</label>
+                                    <input type="text" class="form-control" name="edit-job-name" id="edit-job-name" th:value="${jobName}">
+                                    <div class="valid-tooltip job-name">Job Name Title Looks Good</div>
+                                    <div class="invalid-tooltip job-name">Job Name Is A Required Field</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="edit-job-description">Job Description</label>
+                                    <textarea class="form-control" name="edit-job-description" id="edit-job-description" rows="4"  th:text="${jobDescription}"></textarea>
+                                    <div class="valid-tooltip job-description">Job Description Looks Good</div>
+                                    <div class="invalid-tooltip job-description">Job Description Is A Required Field</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-purple">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-money-bill mr-sm-3"></i>
+                                    <span>Pay Check</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group position-relative">
+                                    <label for="edit-payment-day">Payment Day</label>
+                                    <select class="form-select" name="edit-payment-day" id="edit-payment-day">
+                                        <option value="monday" th:selected="${payCheckPaymentDay.toLowerCase() == 'monday' ? true : false}">Monday</option>
+                                        <option value="tuesday" th:selected="${payCheckPaymentDay.toLowerCase() == 'tuesday' ? true : false}">Tuesday</option>
+                                        <option value="wednesday" th:selected="${payCheckPaymentDay.toLowerCase() == 'wednesday' ? true : false}">Wednesday</option>
+                                        <option value="thursday" th:selected="${payCheckPaymentDay.toLowerCase() == 'thursday' ? true : false}">Thursday</option>
+                                        <option value="friday" th:selected="${payCheckPaymentDay.toLowerCase() == 'friday' ? true : false}">Friday</option>
+                                        <option value="saturday" th:selected="${payCheckPaymentDay.toLowerCase() == 'saturday' ? true : false}">Saturday</option>
+                                        <option value="sunday" th:selected="${payCheckPaymentDay.toLowerCase() == 'sunday' ? true : false}">Sunday</option>
+                                    </select>
+                                    <div class="valid-tooltip payment-day">Payment Day Looks Good</div>
+                                    <div class="invalid-tooltip payment-day">Please Choose A Valid Day</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="edit-total-pay">Predicted Total Payment</label>
+                                    <input type="number" class="form-control" name="edit-total-pay" id="edit-total-pay" min="1" th:value="${payCheckTotalPayment}">
+                                    <div class="valid-tooltip total-pay">Predicted Total Payment Looks Good</div>
+                                    <div class="invalid-tooltip total-pay">Predicted Total Payment Is A Required Field</div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label for="edit-tip-amount">Tips</label>
+                                    <input type="number" class="form-control" name="edit-tip-amount" id="edit-tip-amount" min="0" th:value="${payCheckTips}">
+                                    <div class="valid-tooltip tip-amount">Tip Amount Looks Good</div>
+                                    <div class="invalid-tooltip tip-amount">Tip Amount Must Be A Positive Integer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="btn-group w-100" role="group">
+                            <a id="edit-job-cancel-btn" class="btn btn-danger btn-lg" th:href="${baseUrl + '/dashboard/jobs'}">Cancel</a>
+                            <button id="edit-job-btn" class="btn btn-info text-white btn-lg">Edit Job</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
 </body>
 </html>

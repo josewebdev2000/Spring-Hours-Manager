@@ -1,7 +1,11 @@
 package com.hoursmanager.HoursManager.utils;
 
+import com.hoursmanager.HoursManager.exceptions.UserNotFound;
+import com.hoursmanager.HoursManager.exceptions.ValidationError;
+import com.hoursmanager.HoursManager.forms.AddJobPayload;
 import com.hoursmanager.HoursManager.models.SpringUser;
 import com.hoursmanager.HoursManager.repositories.SpringUserRepository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /*
 *
@@ -43,4 +47,21 @@ public class DbUtils
         }
 
     }
+
+    public static SpringUser getSpringUserFromAddJobPayload(AddJobPayload addJobPayload, SpringUserRepository springUserRepository) throws ValidationError
+    {
+        // Grab User From JobPayload
+        if (addJobPayload.getSpringUserId() == null || addJobPayload.getSpringUserId() <= 1)
+        {
+            throw new ValidationError("Invalid User Id");
+        }
+
+        // Set company user
+        SpringUser springUserOwner = springUserRepository.findById(addJobPayload.getSpringUserId()).orElseThrow(
+                () -> new UserNotFound("User of id " + addJobPayload.getSpringUserId() + " could not be found")
+        );
+
+        return springUserOwner;
+    }
+
 }

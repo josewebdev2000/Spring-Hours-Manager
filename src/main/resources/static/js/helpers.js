@@ -42,6 +42,24 @@ function requiredFieldValidate(field_id)
     }
 }
 
+function requiredPhoneNumberField(field_id)
+{
+    const fieldVal = $(`#${field_id}`).val();
+    const regex = /^\+1 \(\d{3}\) \d{3} - \d{4}$/;
+
+    if (fieldVal.trim().length == 0 && !regex.test(fieldVal))
+    {
+        $(`#${field_id}`).removeClass("is-valid");
+        $(`#${field_id}`).addClass("is-invalid");
+    }
+
+    else
+    {
+        $(`#${field_id}`).removeClass("is-invalid");
+        $(`#${field_id}`).addClass("is-valid");
+    }
+}
+
 function nameValidate(name_id)
 {
     const curName = $(`#${name_id}`).val();

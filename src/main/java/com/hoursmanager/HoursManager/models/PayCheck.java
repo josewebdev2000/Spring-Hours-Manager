@@ -1,5 +1,6 @@
 package com.hoursmanager.HoursManager.models;
 
+import com.hoursmanager.HoursManager.converters.WeekDayEnumConverter;
 import com.hoursmanager.HoursManager.enums.WeekDayEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class PayCheck
     @Column(name = "PayCheckID", nullable = false)
     private Long payCheckId;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = WeekDayEnumConverter.class)
     @Column(name = "PayCheckPaymentDay", nullable = false)
     private WeekDayEnum payCheckPaymentDay;
 
@@ -42,5 +43,4 @@ public class PayCheck
     @ManyToOne
     @JoinColumn(name = "PayCheckJobID", nullable = false)
     private Job payCheckJob;
-
 }

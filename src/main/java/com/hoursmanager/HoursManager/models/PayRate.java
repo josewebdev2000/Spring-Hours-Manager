@@ -1,5 +1,6 @@
 package com.hoursmanager.HoursManager.models;
 
+import com.hoursmanager.HoursManager.converters.PayRateEnumConverter;
 import com.hoursmanager.HoursManager.enums.PayRateEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class PayRate
     @Column(name = "PayRateID", nullable = false)
     private Long payRateId;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = PayRateEnumConverter.class)
     @Column(name = "PayRateType", nullable = false)
     private PayRateEnum payRateType;
 

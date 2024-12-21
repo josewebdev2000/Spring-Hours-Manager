@@ -16,5 +16,4 @@ public interface JobRepository extends JpaRepository<Job, Long>
     // Select Jobs Of User
     @Query("SELECT j FROM Job j WHERE j.jobUser = :springUser")
     List<Job> getJobsBySpringUser(SpringUser springUser);
-
 }

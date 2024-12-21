@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,16 +32,16 @@ public class Job
     private String jobDescription;
 
     @OneToMany(mappedBy="payRateJob", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PayRate> payRates;
+    private List<PayRate> payRates = new ArrayList<PayRate>();
 
     @OneToMany(mappedBy="payCheckJob", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PayCheck> payChecks;
+    private List<PayCheck> payChecks = new ArrayList<PayCheck>();
 
     @OneToMany(mappedBy="workingDayJob", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkingDay> workingDays;
+    private List<WorkingDay> workingDays = new ArrayList<WorkingDay>();
 
     @OneToMany(mappedBy="workSessionJob", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkSession> workSessions;
+    private List<WorkSession> workSessions = new ArrayList<WorkSession>();
 
     @ManyToOne
     @JoinColumn(name = "JobUserID", nullable = false)

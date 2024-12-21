@@ -1,10 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head th:replace="~{fragments/head.html :: head}"></head>
 <body>
+<div class="wrapper">
+    <!--Import Dashboard Header-->
+    <nav th:replace="~{fragments/dashboard-header.html :: dashboard-header}"></nav>
+    <!--Import Dashboard Sidebar-->
+    <aside th:replace="~{fragments/dashboard-sidebar.html :: dashboard-sidebar}"></aside>
 
+    <!--Import the Dashboard Preloader-->
+    <div th:replace="~{fragments/dashboard-preloader.html :: dashboard-preloader}"></div>
+
+    <!--Place content of the index page here-->
+    <div class="content-wrapper" id="job-page-content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>View Job Details</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="${baseUrl + '/dashboard'}" href="/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item">Job</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="text-left mt-3">
+                            <a th:href="${baseUrl + '/dashboard/jobs'}" href="/dashboard/jobs" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-maroon">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-user-tie mr-sm-3"></i>
+                                    <span>Company</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" id="view-company-name" class="form-control" th:value="${companyName}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company Email</label>
+                                    <input type="email" id="view-company-email" class="form-control" th:value="${companyEmail}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company Phone Number</label>
+                                    <input type="text" class="form-control" th:value="${companyPhoneNumber}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-dollar-sign mr-sm-3"></i>
+                                    <span>Pay Rate</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Rate Type</label>
+                                    <input type="text" class="form-control" th:value="${payRateType}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rate Amount</label>
+                                    <input type="text" class="form-control" th:value="${payRateAmount}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-pink">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-suitcase mr-sm-3"></i>
+                                    <span>Job</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Job Name</label>
+                                    <input type="text" class="form-control" th:value="${jobName}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Job Description</label>
+                                    <textarea type="text" class="form-control" th:text="${jobDescription}" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-purple">
+                            <div class="card-header">
+                                <h2 class="card-title fsize-150">
+                                    <i class="fas fa-money-bill mr-sm-3"></i>
+                                    <span>Pay Check</span>
+                                </h2>
+                                <div class="card-tools">
+                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Payment Day</label>
+                                    <input type="text" class="form-control" th:value="${payCheckPaymentDay}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Predicted Total Payment</label>
+                                    <input type="text" class="form-control" th:value="${payCheckTotalPayment}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tips</label>
+                                    <input type="text" class="form-control" th:value="${payCheckTips}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!--Body Scripts-->
+<div th:replace="~{fragments/bottom.html :: body-scripts}"></div>
 </body>
 </html>

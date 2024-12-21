@@ -3,9 +3,10 @@
 /* JS Script for adding a job to job page */
 function mainJob()
 {
+    emptyAddJobFormFields();
+
     // Initialize Phone Mask for Phone Number Input
     initializePhoneMask();
-
 
     // Validate Job Data
     validateAddJobData();
@@ -21,6 +22,18 @@ function validateAddJobData()
         input: () => requiredFieldValidate("company-name"),
         focus: () => formControlFocusValidate("company-name"),
         blur: () => formControlBlurValidate("company-name")
+    });
+
+    $("#company-email").on({
+        input: () => requiredFieldValidate("company-email"),
+        focus: () => formControlFocusValidate("company-email"),
+        blur: () => formControlBlurValidate("company-email")
+    });
+
+    $("#company-phone-number").on({
+        input: () => requiredFieldValidate("company-phone-number"),
+        focus: () => formControlFocusValidate("company-phone-number"),
+        blur: () => formControlBlurValidate("company-phone-number")
     });
 
     // Validate Job Section
@@ -69,7 +82,6 @@ function validateAddJobData()
         focus: () => formControlFocusValidate("tip-amount"),
         blur: () => formControlBlurValidate("tip-amount")
     });
-
 }
 
 
@@ -136,6 +148,8 @@ function sendAddNewJobAjaxRequestToBackend()
         // Required Form Control Checks
         const requiredFormControls = [
             $("#company-name"),
+            $("#company-email"),
+            $("#company-phone-number"),
             $("#job-name"),
             $("#job-description"),
             $("#rate-type"),
@@ -202,7 +216,7 @@ function sendAddNewJobAjaxRequestToBackend()
                 },
                 success: function (response) {
                     // Show Success Alert When New Job Could Be Added
-                    const message = response["message"];
+                    const message = response["success"];
 
                     displayFormSuccessAlert("job-page-content-wrapper", message, false);
                     emptyAddJobFormFields();

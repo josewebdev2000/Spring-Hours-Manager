@@ -7,13 +7,26 @@ import lombok.Getter;
 @Getter
 public enum WeekDayEnum
 {
-    MONDAY("monday"),
-    TUESDAY("tuesday"),
-    WEDNESDAY("wednesday"),
-    THURSDAY("thursday"),
-    FRIDAY("friday"),
-    SATURDAY("saturday"),
-    SUNDAY("sunday");
+    monday("monday"),
+    tuesday("tuesday"),
+    wednesday("wednesday"),
+    thursday("thursday"),
+    friday("friday"),
+    saturday("saturday"),
+    sunday("sunday");
 
     private final String weekDay;
+
+    public static WeekDayEnum fromValue(String val)
+    {
+        for (WeekDayEnum weekDay : WeekDayEnum.values())
+        {
+            if (weekDay.weekDay.equals(val))
+            {
+                return weekDay;
+            }
+        }
+
+        throw new IllegalArgumentException("Unknown enum value: " + val);
+    }
 }

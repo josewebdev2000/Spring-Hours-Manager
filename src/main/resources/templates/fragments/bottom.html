@@ -43,6 +43,7 @@
 
     <!--Conditionally Render for Job-->
     <script th:if="${request.getRequestURI().equals('/dashboard/job')}" src="/js/job/job-add.js" th:src="${baseUrl + '/js/job/job-add.js'}"></script>
+    <script th:if="${request.getRequestURI().equals('/dashboard/job')}" src="/js/job/job-edit.js" th:src="${baseUrl + '/js/job/job-edit.js'}"></script>
 </div>
 </body>
 </html>
